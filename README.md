@@ -9,19 +9,28 @@ and can then customize the specific ones they chose in
 minor ways.
 
 **Some elements I would like to include are**
-- Changable nicknames for the pokemon
+- Changable nicknames for the Pokémon
 - Reordering of the team list
-- A rendering of the trainer and the pokemon team
-- Possibly changable moves/abilities of the pokemon
+- A rendering of the trainer and the Pokémon team
+- Possibly changable moves/abilities of the Pokémon
 - Possibly provide statics about the team composition
 
 This project is meant to be a source of entertainment
 and as an application for anybody who is interested in
-pokemon. It could either be used to devise a possible
+Pokémon. It could either be used to devise a possible
 team for battling, or just to try out different combinations
 
-I enjoy playing video games and pokemon is one of my
+I enjoy playing video games and Pokémon is one of my
 favourite series, so this idea came naturally. I am very
 excited to combine two of my passions into this project,
-pokemon and programming, and I look forward to completing
+Pokémon and programming, and I look forward to completing
 it!
+
+## User Stories
+- As a user, I want to be able to create a new Pokémon team, and add it to a list of teams
+- As a user, I want to be able to select a team and add up to 6 new Pokémon to it along with a name
+- As a user, I want to be able to remove a Pokémon from a specific team
+- As a user, I want to be able to pick a team, and see all the Pokémon on it
+- As a user, I want to be able to be able to set certain attributes for each Pokémon on my team
+- As a user, I want to see a rendering of me, the trainer, along with all my Pokémon on the team
+- 
