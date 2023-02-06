@@ -33,4 +33,3 @@ it!
 - As a user, I want to be able to pick a team, and see all the Pokémon on it
 - As a user, I want to be able to be able to set certain attributes for each Pokémon on my team
 - As a user, I want to see a rendering of me, the trainer, along with all my Pokémon on the team
-- 
