@@ -7,22 +7,22 @@ public class Trainer {
     // Fields ----------------------------------------------------------------------------------------------------------
     private String name;
     private Gender gender;
-    private List<Pokemon> caughtPokemon;
+    private List<Pokemon> ranch;
     private List<Team> teams;
 
     public enum Gender {
-        MALE, FEMALE, OTHER;
+        MALE, FEMALE, OTHER
     }
 
     // Constructors ----------------------------------------------------------------------------------------------------
     public Trainer(String name, Gender gender) {
         this.name = name;
         this.gender = gender;
-        caughtPokemon = new ArrayList<>();
+        ranch = new ArrayList<>();
         teams = new ArrayList<>();
     }
 
-    // Methods ---------------------------------------------------------------------------------------------------------
+    // Getters and Setters ---------------------------------------------------------------------------------------------
     public String getName() {
         return name;
     }
@@ -37,5 +37,13 @@ public class Trainer {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    // Methods ---------------------------------------------------------------------------------------------------------
+    @Override
+    public String toString() {
+        return name + " the Trainer!\n"
+                + "Pokemon caught: " + ranch.size() + "\n"
+                + "Teams created: " + teams.size();
     }
 }
