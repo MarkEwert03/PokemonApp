@@ -3,6 +3,8 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static model.Team.TEAM_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,8 +53,16 @@ class TeamTest {
         fullTeam.addPokemon(cater);
         fullTeam.addPokemon(meta);
         fullTeam.addPokemon(butter);
+        fullTeam.addPokemon(pid);
         fullTeam.addPokemon(rat);
         fullTeam.addPokemon(fear);
+    }
+
+    @Test
+    void testSetName() {
+        assertEquals("Empty", emptyTeam.getName());
+        emptyTeam.setName("New Empty");
+        assertEquals("New Empty", emptyTeam.getName());
     }
 
     @Test
@@ -72,6 +82,7 @@ class TeamTest {
 
     @Test
     void testAddPokemonEmptyTeam() {
+        assertEquals(emptyTeam.getRoster(), new ArrayList<Pokemon>());
         Pokemon testP = new Pokemon(Pokemon.Species.EKANS);
         assertTrue(emptyTeam.addPokemon(testP));
         assertFalse(emptyTeam.isEmpty());
@@ -153,14 +164,14 @@ class TeamTest {
 
     @Test
     void testToStringSingleTeam() {
-        String expectedString = "Team " + emptyTeam.getName() + " consists of:\n";
+        String expectedString = "Team " + singleTeam.getName() + " consists of:\n";
         expectedString += " - " + pika.toString() + "\n";
         assertEquals(expectedString, singleTeam.toString());
     }
 
     @Test
     void testToStringMultipleTeam() {
-        String expectedString = "Team " + emptyTeam.getName() + " consists of:\n";
+        String expectedString = "Team " + multipleTeam.getName() + " consists of:\n";
         expectedString += " - " + bulba.toString() + "\n";
         expectedString += " - " + charm.toString() + "\n";
         expectedString += " - " + squirt.toString() + "\n";

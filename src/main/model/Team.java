@@ -32,43 +32,66 @@ public class Team {
 
     // EFFECTS: returns the number of Pokemon in the team
     public int length() {
-        return 0; //stub
+        return roster.size();
     }
 
     // EFFECTS: returns true if the team is empty, false otherwise
     public boolean isEmpty() {
-        return false; //stub
+        return length() == 0;
     }
 
     // EFFECTS: returns true if the team has reached the maximum team size
     public boolean isMaxSize() {
-        return false; //stub
+        return length() == TEAM_SIZE;
     }
 
     // REQUIRES: p does not have the same species and nickname as another Pokemon in the team
     // MODIFIES: this
     // EFFECTS: length of team < TEAM_SIZE, adds p to the team and returns true, otherwise returns false
     public boolean addPokemon(Pokemon p) {
-        return false; //stub
+        if (length() < TEAM_SIZE) {
+            roster.add(p);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // REQUIRES: length of team is > 0
     // MODIFIES: this
     // EFFECTS: if p is in the team, removes p and returns true, otherwise returns false
     public boolean removePokemon(Pokemon p) {
-        return false; //stub
+        if (roster.contains(p)) {
+            roster.remove(p);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // EFFECTS: if p is in the team, returns the 0-based index of p in the team, returns -1 otherwise
     public int getPokemonIndex(Pokemon p) {
-        return -1; //stub
+        return roster.indexOf(p);
     }
 
     // MODIFIES: this
     // EFFECTS: if p is in the team, moves p to the front of the team and shifts the remaining Pokemon down by 1,
     //          otherwise return false
     public boolean moveFront(Pokemon p) {
-        return false; //stub
+        if (roster.contains(p)) {
+            int index = getPokemonIndex(p);
+            for (int i = length() - 1; i >= 0; i--) {
+                if (i == 0) {
+                    roster.set(0, p);
+                } else if (i <= index) {
+                    Pokemon shiftP = roster.get(i - 1);
+                    roster.set(i, shiftP);
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
