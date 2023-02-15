@@ -5,7 +5,7 @@ import java.util.*;
 // Represents a team with name, and up to TEAM_SIZE number of Pokemon
 public class Team {
     // Fields ----------------------------------------------------------------------------------------------------------
-    private static final int TEAM_SIZE = 6;
+    public static final int TEAM_SIZE = 6;
     private String name;
     private List<Pokemon> roster;
 
@@ -57,6 +57,11 @@ public class Team {
     // EFFECTS: if p is in the team, removes p and returns true, otherwise returns false
     public boolean removePokemon(Pokemon p) {
         return false; //stub
+    }
+
+    // EFFECTS: if p is in the team, returns the 0-based index of p in the team, returns -1 otherwise
+    public int getPokemonIndex(Pokemon p) {
+        return -1; //stub
     }
 
     // MODIFIES: this
