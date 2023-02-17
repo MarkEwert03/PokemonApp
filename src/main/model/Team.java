@@ -20,10 +20,6 @@ public class Team {
         return name;
     }
 
-    public List<Pokemon> getRoster() {
-        return roster;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -45,7 +41,7 @@ public class Team {
         return length() == TEAM_SIZE;
     }
 
-    // REQUIRES: p does not have the same species and nickname as another Pokemon in the team
+    // REQUIRES: p does not have the nickname as another Pokemon in the team
     // MODIFIES: this
     // EFFECTS: length of team < TEAM_SIZE, adds p to the team and returns true, otherwise returns false
     public boolean addPokemon(Pokemon p) {
@@ -59,7 +55,7 @@ public class Team {
 
     // REQUIRES: length of team is > 0
     // MODIFIES: this
-    // EFFECTS: if p is in the team, removes p and returns true, otherwise returns false
+    // EFFECTS: if p is in the team, removes p from roster and returns true, otherwise returns false
     public boolean removePokemon(Pokemon p) {
         if (roster.contains(p)) {
             roster.remove(p);
@@ -80,14 +76,13 @@ public class Team {
     public boolean moveFront(Pokemon p) {
         if (roster.contains(p)) {
             int index = getPokemonIndex(p);
-            for (int i = length() - 1; i >= 0; i--) {
-                if (i == 0) {
-                    roster.set(0, p);
-                } else if (i <= index) {
+            for (int i = length() - 1; i > 0; i--) {
+                if (i <= index) {
                     Pokemon shiftP = roster.get(i - 1);
                     roster.set(i, shiftP);
                 }
             }
+            roster.set(0, p);
             return true;
         } else {
             return false;

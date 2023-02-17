@@ -82,7 +82,6 @@ class TeamTest {
 
     @Test
     void testAddPokemonEmptyTeam() {
-        assertEquals(emptyTeam.getRoster(), new ArrayList<Pokemon>());
         Pokemon testP = new Pokemon(Pokemon.Species.EKANS);
         assertTrue(emptyTeam.addPokemon(testP));
         assertFalse(emptyTeam.isEmpty());
@@ -105,9 +104,10 @@ class TeamTest {
     }
 
     @Test
-    void testRemovePokemonMultipleTeam() {
-        assertTrue(multipleTeam.removePokemon(charm));
-        assertEquals(2, multipleTeam.length());
+    void testRemovePokemonFullTeam() {
+        assertTrue(fullTeam.removePokemon(rat));
+        assertFalse(fullTeam.isMaxSize());
+        assertEquals(TEAM_SIZE-1, fullTeam.length());
     }
 
     @Test
