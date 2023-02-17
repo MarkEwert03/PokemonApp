@@ -64,12 +64,13 @@ public class Pokemon {
 
     // Methods ---------------------------------------------------------------------------------------------------------
 
+    // EFFECTS: helper method that makes the first letter of str upper case, and makes the rest lower
+    private String capitalize(String str) {
+        return str.substring(0,1).toUpperCase() + str.substring(1).toLowerCase();
+    }
+
     @Override
     public String toString() {
         return nickname + " the " + capitalize(species.toString());
-    }
-
-    private String capitalize(String str) {
-        return str.substring(0,1).toUpperCase() + str.substring(1).toLowerCase();
     }
 }

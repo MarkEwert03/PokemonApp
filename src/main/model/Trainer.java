@@ -77,6 +77,14 @@ public class Trainer {
         //stub
     }
 
+    // REQUIRES: p is in ranch
+    // MODIFIES: this
+    // EFFECTS: if Pokemon p is not in Team t, adds p to t and returns true,
+    //          otherwise returns false
+    public boolean addPokemonToTeam(Pokemon p, Team t) {
+        return false; //stub
+    }
+
     // MODIFIES: this
     // EFFECTS: if t is in teams, removes t from teams and returns true,
     //          otherwise returns false
