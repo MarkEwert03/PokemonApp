@@ -70,18 +70,18 @@ public class Trainer {
         return false; //stub
     }
 
-    // REQUIRES: t does not have the same name as any other Team in teams
+    // REQUIRES: teamName is not same name as any other Team in teams
     // MODIFIES: this
-    // EFFECTS: adds Team t to teams
-    public void addTeam(Team t) {
+    // EFFECTS: makes a new empty Team and adds it to trainers list of teams
+    public void makeTeam(String teamName) {
         //stub
     }
 
     // REQUIRES: p is in ranch
     // MODIFIES: this
-    // EFFECTS: if Pokemon p is not in Team t, adds p to t and returns true,
-    //          otherwise returns false
-    public boolean addPokemonToTeam(Pokemon p, Team t) {
+    // EFFECTS: if teamName is name of one of the Trainer's teams and Pokemon p is not in that team,
+    //          adds p to t and returns true, otherwise returns false
+    public boolean addPokemonToTeam(Pokemon p, String teamName) {
         return false; //stub
     }
 
