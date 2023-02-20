@@ -56,18 +56,21 @@ public class Trainer {
         return 0; //stub
     }
 
+    // EFFECTS: produces all the Pokemon in the trainers ranch
+    public String displayRanch() {
+        return ""; //stub
+    }
+
+    // EFFECTS: produces the information about the Pokemon on all the trainers team
+    public String displayTeams() {
+        return ""; //stub
+    }
+
     // REQUIRES: p cannot have the same nickname as any other Pokemon in the ranch
     // MODIFIES: this
     // EFFECTS: adds p to the ranch
     public void addPokemonToRanch(Pokemon p) {
         //stub
-    }
-
-    // MODIFIES: this
-    // EFFECTS: if p is in ranch, removes p from the ranch, removes p from any team that p is in, and returns true,
-    //          otherwise returns false
-    public boolean deletePokemon(Pokemon p) {
-        return false; //stub
     }
 
     // REQUIRES: teamName is not same name as any other Team in teams
@@ -86,16 +89,24 @@ public class Trainer {
     }
 
     // MODIFIES: this
-    // EFFECTS: if t is in teams, removes t from teams and returns true,
+    // EFFECTS: if teamName is name of one of teams, removes that team from teams and returns true,
     //          otherwise returns false
-    public boolean deleteTeam(Team t) {
+    public boolean deleteTeam(String teamName) {
+        return false; //stub
+    }
+
+    // MODIFIES: this
+    // EFFECTS: if Pokemon with nickname nn is in ranch, deletes that Pokemon from the ranch,
+    //            deletes that Pokemon from any team that it is in, and returns true,
+    //          otherwise returns false
+    public boolean deletePokemon(String nn) {
         return false; //stub
     }
 
     @Override
     public String toString() {
         return name + " the Trainer!\n"
-                + "Pokemon caught: " + ranch.size() + "\n"
-                + "Teams created: " + teams.size();
+                + "- Pokemon caught: " + ranch.size() + "\n"
+                + "- Teams created: " + teams.size();
     }
 }
