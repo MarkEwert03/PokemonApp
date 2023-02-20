@@ -41,6 +41,11 @@ public class Team {
         return length() == TEAM_SIZE;
     }
 
+    // EFFECTS: returns true if p is in the team, false otherwise
+    public boolean containsPokemon(Pokemon p) {
+        return roster.contains(p);
+    }
+
     // REQUIRES: p does not have the nickname as another Pokemon in the team
     // MODIFIES: this
     // EFFECTS: length of team < TEAM_SIZE, adds p to the team and returns true, otherwise returns false

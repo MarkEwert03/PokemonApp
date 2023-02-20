@@ -66,6 +66,15 @@ public class TrainerTest {
         squirtle = new Pokemon(SQUIRTLE);
         wartortle = new Pokemon(WARTORTLE);
         blastoise = new Pokemon(BLASTOISE);
+        masterTrainer.addPokemonToRanch(bulbasaur);
+        masterTrainer.addPokemonToRanch(ivysaur);
+        masterTrainer.addPokemonToRanch(venusaur);
+        masterTrainer.addPokemonToRanch(charmander);
+        masterTrainer.addPokemonToRanch(charmeleon);
+        masterTrainer.addPokemonToRanch(charizard);
+        masterTrainer.addPokemonToRanch(squirtle);
+        masterTrainer.addPokemonToRanch(wartortle);
+        masterTrainer.addPokemonToRanch(blastoise);
         masterTrainer.makeTeam("Master Grass Team");
         masterTrainer.makeTeam("Master Fire Team");
         masterTrainer.makeTeam("Master Water Team");
@@ -128,7 +137,7 @@ public class TrainerTest {
     @Test
     void testDisplayTeams() {
         assertEquals("You have 0 teams:", beginnerTrainer.displayTeams());
-        String team1 = "You have 1 team:" +
+        String team1 = "You have 1 team:\n" +
                 "- Empty Team (0 Pokemon)";
         assertEquals(team1, emptyTeamTrainer.displayTeams());
         String team2 = "You have 2 teams:\n" +
@@ -164,7 +173,7 @@ public class TrainerTest {
 
     @Test
     void testAddPokemonToTeamAlreadyInTeam() {
-        assertFalse(advancedTrainer.addPokemonToTeam(beedrill, "Advanced Team B"));
+        assertFalse(advancedTrainer.addPokemonToTeam(beedrill, "Advanced Team A"));
     }
 
     @Test
@@ -195,10 +204,10 @@ public class TrainerTest {
     void testDeletePokemonAdvancedTrainer() {
         assertTrue(advancedTrainer.deletePokemon("Raticate"));
 
-        String newRanchString = "You have 3 Pokemon:\n" +
+        String newRanchString = "You have 2 Pokemon:\n" +
                 "- Beedrill the Beedrill\n" +
                 "- Spearow the Spearow";
-        String newTeamsString = "You have 2 team:\n" +
+        String newTeamsString = "You have 2 teams:\n" +
                 "- Advanced Team A (1 Pokemon)\n" +
                 "- Advanced Team B (1 Pokemon)";
         assertEquals(newRanchString, advancedTrainer.displayRanch());
@@ -207,11 +216,11 @@ public class TrainerTest {
 
     @Test
     void testDeletePokemonNoPokemon() {
-        assertEquals("You have 0 Pokemon:", emptyTeamTrainer.displayRanch());
-        assertEquals("You have 0 teams:", emptyTeamTrainer.displayTeams());
-        assertFalse(emptyTeamTrainer.deletePokemon("Pikachu"));
-        assertEquals("You have 0 Pokemon:", emptyTeamTrainer.displayRanch());
-        assertEquals("You have 0 teams:", emptyTeamTrainer.displayTeams());
+        assertEquals("You have 0 Pokemon:", beginnerTrainer.displayRanch());
+        assertEquals("You have 0 teams:", beginnerTrainer.displayTeams());
+        assertFalse(beginnerTrainer.deletePokemon("Pikachu"));
+        assertEquals("You have 0 Pokemon:", beginnerTrainer.displayRanch());
+        assertEquals("You have 0 teams:", beginnerTrainer.displayTeams());
     }
 
     @Test
@@ -219,7 +228,7 @@ public class TrainerTest {
         String str = "Beginner Boy the Trainer!\n" +
                 "- Pokemon caught: 0\n" +
                 "- Teams created: 0";
-        assertEquals(str, masterTrainer.toString());
+        assertEquals(str, beginnerTrainer.toString());
     }
 
     @Test
@@ -227,6 +236,6 @@ public class TrainerTest {
         String str = "Advanced Girl the Trainer!\n" +
                 "- Pokemon caught: 3\n" +
                 "- Teams created: 2";
-        assertEquals(str, masterTrainer.toString());
+        assertEquals(str, advancedTrainer.toString());
     }
 }

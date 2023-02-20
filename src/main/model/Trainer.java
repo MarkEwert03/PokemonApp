@@ -43,41 +43,49 @@ public class Trainer {
 
     // EFFECTS: returns the number of Pokemon in the ranch
     public int numberPokemon() {
-        return 0; //stub
+        return ranch.size();
     }
 
     // EFFECTS: returns true if there are no Pokemon in the ranch, false otherwise
     public boolean hasZeroPokemon() {
-        return false; //stub
+        return numberPokemon() == 0;
     }
 
     // EFFECTS: returns the number of teams the Trainer has
     public int numberTeams() {
-        return 0; //stub
+        return teams.size();
     }
 
     // EFFECTS: produces all the Pokemon in the trainers ranch
     public String displayRanch() {
-        return ""; //stub
+        String ranchString = "You have " + numberPokemon() + " Pokemon:";
+        for (Pokemon p : ranch) {
+            ranchString += "\n- " + p.toString();
+        }
+        return ranchString;
     }
 
     // EFFECTS: produces the information about the Pokemon on all the trainers team
     public String displayTeams() {
-        return ""; //stub
+        String teamsString = "You have " + numberTeams() + " team" + ((numberTeams() != 1) ? "s:" : ":");
+        for (Team t : teams) {
+            teamsString += "\n- " + t.getName() + " (" + t.length() + " Pokemon)";
+        }
+        return teamsString;
     }
 
     // REQUIRES: p cannot have the same nickname as any other Pokemon in the ranch
     // MODIFIES: this
     // EFFECTS: adds p to the ranch
     public void addPokemonToRanch(Pokemon p) {
-        //stub
+        ranch.add(p);
     }
 
     // REQUIRES: teamName is not same name as any other Team in teams
     // MODIFIES: this
     // EFFECTS: makes a new empty Team and adds it to trainers list of teams
     public void makeTeam(String teamName) {
-        //stub
+        teams.add(new Team(teamName));
     }
 
     // REQUIRES: p is in ranch
@@ -85,14 +93,26 @@ public class Trainer {
     // EFFECTS: if teamName is name of one of the Trainer's teams and Pokemon p is not in that team,
     //          adds p to t and returns true, otherwise returns false
     public boolean addPokemonToTeam(Pokemon p, String teamName) {
-        return false; //stub
+        for (Team t : teams) {
+            if (t.getName().equals(teamName) && !t.containsPokemon(p)) {
+                t.addPokemon(p);
+                return true;
+            }
+        }
+        return false;
     }
 
     // MODIFIES: this
     // EFFECTS: if teamName is name of one of teams, removes that team from teams and returns true,
     //          otherwise returns false
     public boolean deleteTeam(String teamName) {
-        return false; //stub
+        for (Team t : teams) {
+            if (t.getName().equals(teamName)) {
+                teams.remove(t);
+                return true;
+            }
+        }
+        return false;
     }
 
     // MODIFIES: this
@@ -100,7 +120,16 @@ public class Trainer {
     //            deletes that Pokemon from any team that it is in, and returns true,
     //          otherwise returns false
     public boolean deletePokemon(String nn) {
-        return false; //stub
+        for (Pokemon p : ranch) {
+            if (p.getNickname().equals(nn)) {
+                for (Team t: teams) {
+                    t.removePokemon(p);
+                }
+                ranch.remove(p);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
