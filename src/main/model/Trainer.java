@@ -134,8 +134,8 @@ public class Trainer {
 
     @Override
     public String toString() {
-        return name + " the Trainer!\n"
-                + "- Pokemon caught: " + ranch.size() + "\n"
-                + "- Teams created: " + teams.size();
+        return name + " the Trainer!"
+                + "\n- Pokemon caught: " + ranch.size()
+                + "\n- Teams created: " + teams.size();
     }
 }
