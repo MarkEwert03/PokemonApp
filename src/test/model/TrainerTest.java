@@ -97,6 +97,20 @@ public class TrainerTest {
     }
 
     @Test
+    void testSetName() {
+        assertEquals("Beginner Boy", beginnerTrainer.getName());
+        beginnerTrainer.setName("Jimmy");
+        assertEquals("Jimmy", beginnerTrainer.getName());
+    }
+
+    @Test
+    void testSetGender() {
+        assertEquals(MALE, masterTrainer.getGender());
+        masterTrainer.setGender(OTHER);
+        assertEquals(OTHER, masterTrainer.getGender());
+    }
+
+    @Test
     void testNumberPokemon() {
         assertEquals(0, beginnerTrainer.numberPokemon());
         assertEquals(0, emptyTeamTrainer.numberPokemon());

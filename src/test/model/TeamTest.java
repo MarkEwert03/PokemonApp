@@ -3,8 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static model.Team.TEAM_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -66,18 +64,37 @@ class TeamTest {
     }
 
     @Test
-    void testLengthEmptyTeam() {
+    void testLength() {
         assertEquals(0, emptyTeam.length());
+        assertEquals(1, singleTeam.length());
+        assertEquals(3, multipleTeam.length());
+        assertEquals(6, fullTeam.length());
     }
 
     @Test
-    void testIsEmptyEmptyTeam() {
+    void testIsEmpty() {
         assertTrue(emptyTeam.isEmpty());
+        assertFalse(singleTeam.isEmpty());
+        assertFalse(multipleTeam.isEmpty());
+        assertFalse(fullTeam.isEmpty());
     }
 
     @Test
-    void testIsMaxSizeFullTeam() {
+    void testIsMaxSize() {
+        assertFalse(emptyTeam.isMaxSize());
+        assertFalse(singleTeam.isMaxSize());
+        assertFalse(multipleTeam.isMaxSize());
         assertTrue(fullTeam.isMaxSize());
+    }
+
+    @Test
+    void testContainsPokemonInTeam() {
+        assertTrue(multipleTeam.containsPokemon(bulba));
+    }
+
+    @Test
+    void testContainsPokemonNotInTeam() {
+        assertFalse(emptyTeam.containsPokemon(pika));
     }
 
     @Test
