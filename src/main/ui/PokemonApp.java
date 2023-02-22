@@ -49,26 +49,15 @@ public class PokemonApp {
         System.out.println("First, can you please tell me your name? (Type below then hit ENTER)");
         String trainerName = input.next();
 
-        System.out.println("\nThanks, nice to meet you " + trainerName
-                + "! Could you also let me know what your gender is?");
-        System.out.println("Select from:");
-        System.out.println("- m -> male");
-        System.out.println("- f -> female");
-        System.out.println("- o -> other");
-        String in = input.next().toLowerCase();
-        Trainer.Gender m = Trainer.Gender.MALE;
-        Trainer.Gender f = Trainer.Gender.FEMALE;
-        Trainer.Gender o = Trainer.Gender.OTHER;
-        Trainer.Gender trainerGender = (in.equals("m")) ? m : (in.equals("f")) ? f : o;
+        myTrainer = new Trainer(trainerName, Trainer.Gender.OTHER);
 
-        myTrainer = new Trainer(trainerName, trainerGender);
-
-        System.out.println("\nPerfect! Have fun making Pokemon teams!");
+        System.out.println("\nPerfect! Nice to meet you " + trainerName
+                + "! Have fun making Pokemon teams!");
     }
 
     // EFFECTS: displays menu of options to user
     private void displayMainMenu() {
-        System.out.println("Select from:");
+        System.out.println("\nSelect from:");
         System.out.println("- d -> display your information");
         System.out.println("- i -> modify your trainer information");
         System.out.println("- r -> customize your ranch of Pokemon");
@@ -78,8 +67,8 @@ public class PokemonApp {
 
     // MODIFIES: this
     // EFFECTS: processes the users command
-    private void processCommand(String com) {
-        switch (com) {
+    private void processCommand(String command) {
+        switch (command) {
             case "d":
                 System.out.println(myTrainer.toString());
                 break;
@@ -93,7 +82,7 @@ public class PokemonApp {
                 modifyTeam();
                 break;
             default:
-                System.out.println("Selection not valid");
+                System.out.println("Selection not valid, please try again");
                 break;
         }
     }
@@ -101,7 +90,52 @@ public class PokemonApp {
     // MODIFIES: this
     // EFFECTS: allows user to change trainers name, and gender
     private void modifyTrainer() {
-        //!!!
+        System.out.println("You can change your trainer information here! Select from:");
+        System.out.println("- n -> change your name");
+        System.out.println("- g -> change your gender");
+        System.out.println("- z -> go back to the main menu");
+
+        String command = input.next();
+        switch (command) {
+            case "n":
+                changeTrainerName();
+                break;
+            case "g":
+                changeTrainerGender();
+                break;
+            default:
+                System.out.println("Selection not valid, please try again");
+                break;
+        }
+
+        if (!command.equals("z")) {
+            modifyTrainer();
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: allows user to change their Trainer's name
+    private void changeTrainerName() {
+        System.out.println("Your current name is " + myTrainer.getName()
+                + ". What do you want to change your name to?");
+        String newName = input.next();
+        myTrainer.setName(newName);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: allows user to change their Trainer's gender
+    private void changeTrainerGender() {
+        System.out.println("Your current gender is " + myTrainer.getGender()
+                + ". What do you want to change your gender to? Select from:");
+        System.out.println("- m -> male");
+        System.out.println("- f -> female");
+        System.out.println("- o -> other");
+        String in = input.next().toLowerCase();
+        Trainer.Gender m = Trainer.Gender.MALE;
+        Trainer.Gender f = Trainer.Gender.FEMALE;
+        Trainer.Gender o = Trainer.Gender.OTHER;
+        Trainer.Gender newGender = (in.equals("m")) ? m : (in.equals("f")) ? f : o;
+        myTrainer.setGender(newGender);
     }
 
     // MODIFIES: this
