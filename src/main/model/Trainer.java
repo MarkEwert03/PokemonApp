@@ -51,9 +51,29 @@ public class Trainer {
         return numberPokemon() == 0;
     }
 
-    // EFFECTS: returns the number of teams the Trainer has
+    // EFFECTS: returns the number of teams the trainer has
     public int numberTeams() {
         return teams.size();
+    }
+
+    // REQUIRES: given nickname is a nickname of exactly one Pokemon in the ranch
+    // EFFECTS: returns the Pokemon corresponding to the given nickname
+    public Pokemon getPokemonFromNickname(String nickname) {
+        for (Pokemon p : ranch) {
+            if (p.getNickname().equals(nickname)) {
+                return p;
+            }
+        }
+        return new Pokemon(Pokemon.Species.BULBASAUR);
+    }
+
+    // EFFECTS: returns an array list of all the Pokemon in the Trainer's ranch
+    public ArrayList<String> getAllPokemonNicknames() {
+        ArrayList<String> nicknames = new ArrayList<>();
+        for (Pokemon p : ranch) {
+            nicknames.add(p.getNickname());
+        }
+        return nicknames;
     }
 
     // EFFECTS: produces all the Pokemon in the trainers ranch
@@ -64,6 +84,34 @@ public class Trainer {
         }
         return ranchString;
     }
+
+    // EFFECTS: produces a detailed summary of all the Pokemon in the ranch
+    public String detailedRanchSummary(int longestSpec, int longestNick) {
+        StringBuilder detailedSummary = new StringBuilder();
+        for (Pokemon p : ranch) {
+            detailedSummary.append(p.oneLineSummary(longestSpec, longestNick)).append("\n");
+        }
+        return detailedSummary.toString();
+    }
+
+    // EFFECTS: returns the longest species name of Pokemon in trainer's ranch, 0 if ranch is empty
+    public int getLongestSpeciesName() {
+        int longestSpecies = 0;
+        for (Pokemon p : ranch) {
+            longestSpecies = Math.max(longestSpecies, p.getSpecies().name().length());
+        }
+        return longestSpecies;
+    }
+
+    // EFFECTS: returns the longest nickname of Pokemon in trainer's ranch, 0 if ranch is empty
+    public int getLongestNickname() {
+        int longestNickname = 0;
+        for (Pokemon p : ranch) {
+            longestNickname = Math.max(longestNickname, p.getNickname().length());
+        }
+        return longestNickname;
+    }
+
 
     // EFFECTS: produces the information about the Pokemon on all the trainers team
     public String displayTeams() {

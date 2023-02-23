@@ -64,9 +64,60 @@ public class Pokemon {
 
     // Methods ---------------------------------------------------------------------------------------------------------
 
+    // EFFECTS: returns true if spec is a valid Pokemon species
+    public static boolean isValidSpecies(String spec) {
+        for (Species s : Species.values()) {
+            if (spec.equalsIgnoreCase(s.name())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // EFFECTS: displays the summary of this Pokemon over multiple lines
+    public String summary() {
+        String summary = "";
+        summary += "Nickname: " + nickname;
+        summary += "\nSpecies: " + capitalize(species.name());
+        summary += "\nGender: " + getGenderSymbol();
+        summary += "\nShiny Status: " + getShinySymbol();
+        return summary;
+    }
+
+    // EFFECTS: displays the summary of this Pokemon in one line with spacing based on longestSpec and longestNick
+    public String oneLineSummary(int longestSpec, int longestNick) {
+        String summary = "";
+        summary += "Nickname: " + nickname + " ".repeat(longestNick - nickname.length());
+        summary += " Species: " + capitalize(species.name()) + " ".repeat(longestSpec - species.name().length());
+        summary += " Gender: " + getGenderSymbol();
+        summary += " Shiny Status: " + getShinySymbol();
+        return summary;
+    }
+
+
+    // EFFECTS: returns the symbols showing whether Pokemon is shiny or not
+    private String getShinySymbol() {
+        if (shiny) {
+            return "⭐SHINY⭐";
+        } else {
+            return "NOT SHINY";
+        }
+    }
+
+    // EFFECTS: returns the respective symbol corresponding to the Pokemon's gender
+    private String getGenderSymbol() {
+        if (gender.equals(Gender.MALE)) {
+            return "♂";
+        } else if (gender.equals(Gender.FEMALE)) {
+            return "♀";
+        } else {
+            return "?";
+        }
+    }
+
     // EFFECTS: helper method that makes the first letter of str upper case, and makes the rest lower
     private String capitalize(String str) {
-        return str.substring(0,1).toUpperCase() + str.substring(1).toLowerCase();
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
 
     @Override
