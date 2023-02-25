@@ -46,6 +46,33 @@ public class Team {
         return roster.contains(p);
     }
 
+    // EFFECTS: displays the summary of this Team over multiple lines
+    public String summary() {
+        if (isEmpty()) {
+            return name + " is empty";
+        } else {
+            StringBuilder output = new StringBuilder("Team " + name + " consists of:");
+            for (Pokemon p : roster) {
+                output.append("\n - ").append(p.toString());
+            }
+            return output.toString();
+        }
+    }
+
+    // EFFECTS: displays the summary of this Team in one line
+    public String oneLineSummary() {
+        if (isEmpty()) {
+            return " " + name + " is empty";
+        } else {
+            StringBuilder output = new StringBuilder(name + ": ");
+            for (int i = 0; i < length(); i++) {
+                Pokemon p = roster.get(i);
+                output.append(" (").append(String.valueOf(i + 1)).append(") ").append(p.toString());
+            }
+            return output.toString();
+        }
+    }
+
     // REQUIRES: p does not have the nickname as another Pokemon in the team
     // MODIFIES: this
     // EFFECTS: length of team < TEAM_SIZE, adds p to the team and returns true, otherwise returns false
@@ -96,10 +123,6 @@ public class Team {
 
     @Override
     public String toString() {
-        StringBuilder output = new StringBuilder("Team " + name + " consists of:\n");
-        for (Pokemon p : roster) {
-            output.append(" - ").append(p.toString()).append("\n");
-        }
-        return output.toString();
+        return name + " (" + length() + " Pokemon)";
     }
 }

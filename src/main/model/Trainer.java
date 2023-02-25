@@ -56,15 +56,9 @@ public class Trainer {
         return teams.size();
     }
 
-    // REQUIRES: given nickname is a nickname of exactly one Pokemon in the ranch
-    // EFFECTS: returns the Pokemon corresponding to the given nickname
-    public Pokemon getPokemonFromNickname(String nickname) {
-        for (Pokemon p : ranch) {
-            if (p.getNickname().equals(nickname)) {
-                return p;
-            }
-        }
-        return new Pokemon(Pokemon.Species.BULBASAUR);
+    // EFFECTS: returns true if the trainer has no teams, false otherwise
+    public boolean hasZeroTeams() {
+        return numberTeams() == 0;
     }
 
     // EFFECTS: returns an array list of all the Pokemon in the Trainer's ranch
@@ -76,13 +70,24 @@ public class Trainer {
         return nicknames;
     }
 
+    // REQUIRES: given nickname is a nickname of exactly one Pokemon in the ranch
+    // EFFECTS: returns the Pokemon corresponding to the given nickname
+    public Pokemon getPokemonFromNickname(String nickname) {
+        for (Pokemon p : ranch) {
+            if (p.getNickname().equals(nickname)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
     // EFFECTS: produces all the Pokemon in the trainers ranch
     public String displayRanch() {
-        String ranchString = "You have " + numberPokemon() + " Pokemon:";
+        StringBuilder ranchString = new StringBuilder("You have " + numberPokemon() + " Pokemon:");
         for (Pokemon p : ranch) {
-            ranchString += "\n- " + p.toString();
+            ranchString.append("\n- ").append(p.toString());
         }
-        return ranchString;
+        return ranchString.toString();
     }
 
     // EFFECTS: produces a detailed summary of all the Pokemon in the ranch
@@ -112,14 +117,43 @@ public class Trainer {
         return longestNickname;
     }
 
-
     // EFFECTS: produces the information about the Pokemon on all the trainers team
     public String displayTeams() {
-        String teamsString = "You have " + numberTeams() + " team" + ((numberTeams() != 1) ? "s:" : ":");
+        String startingString = "You have " + numberTeams() + " team" + ((numberTeams() != 1) ? "s:" : ":");
+        StringBuilder teamsString = new StringBuilder(startingString);
         for (Team t : teams) {
-            teamsString += "\n- " + t.getName() + " (" + t.length() + " Pokemon)";
+            teamsString.append("\n- ").append(t.getName()).append(" (").append(t.length()).append(" Pokemon)");
         }
-        return teamsString;
+        return teamsString.toString();
+    }
+
+    // EFFECTS: produces a detailed summary of all the Pokemon in the list of teams
+    public String detailedListOfTeamsSummary() {
+        StringBuilder detailedSummary = new StringBuilder();
+        for (Team t : teams) {
+            detailedSummary.append("\n").append(t.oneLineSummary());
+        }
+        return detailedSummary.toString();
+    }
+
+    // EFFECTS: returns an array list of all the team names in the Trainers list of teams
+    public ArrayList<String> getAllTeamNames() {
+        ArrayList<String> nicknames = new ArrayList<>();
+        for (Team t : teams) {
+            nicknames.add(t.getName());
+        }
+        return nicknames;
+    }
+
+    // REQUIRES: given team name is name of exactly one team in list of teams
+    // EFFECTS: returns the Team corresponding to the given name
+    public Team getTeamFromName(String name) {
+        for (Team t : teams) {
+            if (t.getName().equals(name)) {
+                return t;
+            }
+        }
+        return null;
     }
 
     // REQUIRES: p cannot have the same nickname as any other Pokemon in the ranch
@@ -170,7 +204,7 @@ public class Trainer {
     public boolean deletePokemon(String nn) {
         for (Pokemon p : ranch) {
             if (p.getNickname().equals(nn)) {
-                for (Team t: teams) {
+                for (Team t : teams) {
                     t.removePokemon(p);
                 }
                 ranch.remove(p);
