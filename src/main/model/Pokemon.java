@@ -94,7 +94,6 @@ public class Pokemon {
         return summary;
     }
 
-
     // EFFECTS: returns the symbols showing whether Pokemon is shiny or not
     private String getShinySymbol() {
         if (shiny) {

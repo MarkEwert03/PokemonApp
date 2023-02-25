@@ -67,7 +67,7 @@ public class Team {
             StringBuilder output = new StringBuilder(name + ": ");
             for (int i = 0; i < length(); i++) {
                 Pokemon p = roster.get(i);
-                output.append(" (").append(String.valueOf(i + 1)).append(") ").append(p.toString());
+                output.append(" (").append(i + 1).append(") ").append(p.toString());
             }
             return output.toString();
         }

@@ -88,12 +88,22 @@ class TeamTest {
     }
 
     @Test
-    void testContainsPokemonInTeam() {
-        assertTrue(multipleTeam.containsPokemon(bulba));
+    void testSummary() {
+        assertEquals("Empty is empty", emptyTeam.summary());
+        assertEquals("Team Single consists of:\n - Pikachu the Pikachu", singleTeam.summary());
     }
 
     @Test
-    void testContainsPokemonNotInTeam() {
+    void testOneLineSummary() {
+        assertEquals(" Empty is empty", emptyTeam.oneLineSummary());
+        String mult = "Multiple:  (1) Bulbasaur the Bulbasaur (2) Charmander the Charmander (3) Squirtle the Squirtle";
+        assertEquals(mult, multipleTeam.oneLineSummary());
+    }
+
+    @Test
+    void testContainsPokemon() {
+        assertTrue(multipleTeam.containsPokemon(bulba));
+        assertFalse(multipleTeam.containsPokemon(pika));
         assertFalse(emptyTeam.containsPokemon(pika));
     }
 
@@ -174,24 +184,10 @@ class TeamTest {
     }
 
     @Test
-    void testToStringEmptyTeam() {
-        String expectedString = "Team " + emptyTeam.getName() + " consists of:\n";
-        assertEquals(expectedString, emptyTeam.toString());
-    }
-
-    @Test
-    void testToStringSingleTeam() {
-        String expectedString = "Team " + singleTeam.getName() + " consists of:\n";
-        expectedString += " - " + pika.toString() + "\n";
-        assertEquals(expectedString, singleTeam.toString());
-    }
-
-    @Test
-    void testToStringMultipleTeam() {
-        String expectedString = "Team " + multipleTeam.getName() + " consists of:\n";
-        expectedString += " - " + bulba.toString() + "\n";
-        expectedString += " - " + charm.toString() + "\n";
-        expectedString += " - " + squirt.toString() + "\n";
-        assertEquals(expectedString, multipleTeam.toString());
+    void testToString() {
+        assertEquals("Empty (0 Pokemon)", emptyTeam.toString());
+        assertEquals("Single (1 Pokemon)", singleTeam.toString());
+        assertEquals("Multiple (3 Pokemon)", multipleTeam.toString());
+        assertEquals("Full (6 Pokemon)", fullTeam.toString());
     }
 }

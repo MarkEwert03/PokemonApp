@@ -39,7 +39,7 @@ public class Trainer {
         this.gender = gender;
     }
 
-    // Methods ---------------------------------------------------------------------------------------------------------
+    // Pokemon Methods -------------------------------------------------------------------------------------------------
 
     // EFFECTS: returns the number of Pokemon in the ranch
     public int numberPokemon() {
@@ -49,16 +49,6 @@ public class Trainer {
     // EFFECTS: returns true if there are no Pokemon in the ranch, false otherwise
     public boolean hasZeroPokemon() {
         return numberPokemon() == 0;
-    }
-
-    // EFFECTS: returns the number of teams the trainer has
-    public int numberTeams() {
-        return teams.size();
-    }
-
-    // EFFECTS: returns true if the trainer has no teams, false otherwise
-    public boolean hasZeroTeams() {
-        return numberTeams() == 0;
     }
 
     // EFFECTS: returns an array list of all the Pokemon in the Trainer's ranch
@@ -79,6 +69,30 @@ public class Trainer {
             }
         }
         return null;
+    }
+
+    // REQUIRES: p cannot have the same nickname as any other Pokemon in the ranch
+    // MODIFIES: this
+    // EFFECTS: adds p to the ranch
+    public void addPokemonToRanch(Pokemon p) {
+        ranch.add(p);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: if Pokemon with nickname nn is in ranch, deletes that Pokemon from the ranch,
+    //            deletes that Pokemon from any team that it is in, and returns true,
+    //          otherwise returns false
+    public boolean deletePokemon(String nn) {
+        for (Pokemon p : ranch) {
+            if (p.getNickname().equals(nn)) {
+                for (Team t : teams) {
+                    t.removePokemon(p);
+                }
+                ranch.remove(p);
+                return true;
+            }
+        }
+        return false;
     }
 
     // EFFECTS: produces all the Pokemon in the trainers ranch
@@ -117,6 +131,76 @@ public class Trainer {
         return longestNickname;
     }
 
+    // Team Methods ----------------------------------------------------------------------------------------------------
+    // EFFECTS: returns the number of teams the trainer has
+    public int numberTeams() {
+        return teams.size();
+    }
+
+    // EFFECTS: returns true if the trainer has no teams, false otherwise
+    public boolean hasZeroTeams() {
+        return numberTeams() == 0;
+    }
+
+    // REQUIRES: given team name is name of exactly one team in list of teams
+    // EFFECTS: returns the Team corresponding to the given name
+    public Team getTeamFromName(String name) {
+        for (Team t : teams) {
+            if (t.getName().equals(name)) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+    // EFFECTS: returns an array list of all the team names in the Trainers list of teams
+    public ArrayList<String> getAllTeamNames() {
+        ArrayList<String> teamNames = new ArrayList<>();
+        for (Team t : teams) {
+            teamNames.add(t.getName());
+        }
+        return teamNames;
+    }
+
+    // REQUIRES: teamName is not same name as any other Team in teams
+    // MODIFIES: this
+    // EFFECTS: makes a new empty Team and adds it to trainers list of teams
+    public void makeTeam(String teamName) {
+        teams.add(new Team(teamName));
+    }
+
+    // REQUIRES: p is in ranch
+    // MODIFIES: this
+    // EFFECTS: if teamName is name of one of the Trainer's teams and Pokemon p is not in that team,
+    //          adds p to t and returns true, otherwise returns false
+    public boolean addPokemonToTeam(Pokemon addingPokemon, String addingTeamName) {
+        Team addingTeam;
+        if (getAllTeamNames().contains(addingTeamName)) {
+            addingTeam = getTeamFromName(addingTeamName);
+        } else {
+            return false;
+        }
+
+        if (!addingTeam.containsPokemon(addingPokemon)) {
+            addingTeam.addPokemon(addingPokemon);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: if teamName is name of one of teams, removes that team from teams and returns true,
+    //          otherwise returns false
+    public boolean deleteTeam(String teamName) {
+        if (getAllTeamNames().contains(teamName)) {
+            Team deletingTeam = getTeamFromName(teamName);
+            teams.remove(deletingTeam);
+            return true;
+        }
+        return false;
+    }
+
     // EFFECTS: produces the information about the Pokemon on all the trainers team
     public String displayTeams() {
         String startingString = "You have " + numberTeams() + " team" + ((numberTeams() != 1) ? "s:" : ":");
@@ -136,84 +220,7 @@ public class Trainer {
         return detailedSummary.toString();
     }
 
-    // EFFECTS: returns an array list of all the team names in the Trainers list of teams
-    public ArrayList<String> getAllTeamNames() {
-        ArrayList<String> nicknames = new ArrayList<>();
-        for (Team t : teams) {
-            nicknames.add(t.getName());
-        }
-        return nicknames;
-    }
-
-    // REQUIRES: given team name is name of exactly one team in list of teams
-    // EFFECTS: returns the Team corresponding to the given name
-    public Team getTeamFromName(String name) {
-        for (Team t : teams) {
-            if (t.getName().equals(name)) {
-                return t;
-            }
-        }
-        return null;
-    }
-
-    // REQUIRES: p cannot have the same nickname as any other Pokemon in the ranch
-    // MODIFIES: this
-    // EFFECTS: adds p to the ranch
-    public void addPokemonToRanch(Pokemon p) {
-        ranch.add(p);
-    }
-
-    // REQUIRES: teamName is not same name as any other Team in teams
-    // MODIFIES: this
-    // EFFECTS: makes a new empty Team and adds it to trainers list of teams
-    public void makeTeam(String teamName) {
-        teams.add(new Team(teamName));
-    }
-
-    // REQUIRES: p is in ranch
-    // MODIFIES: this
-    // EFFECTS: if teamName is name of one of the Trainer's teams and Pokemon p is not in that team,
-    //          adds p to t and returns true, otherwise returns false
-    public boolean addPokemonToTeam(Pokemon p, String teamName) {
-        for (Team t : teams) {
-            if (t.getName().equals(teamName) && !t.containsPokemon(p)) {
-                t.addPokemon(p);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // MODIFIES: this
-    // EFFECTS: if teamName is name of one of teams, removes that team from teams and returns true,
-    //          otherwise returns false
-    public boolean deleteTeam(String teamName) {
-        for (Team t : teams) {
-            if (t.getName().equals(teamName)) {
-                teams.remove(t);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // MODIFIES: this
-    // EFFECTS: if Pokemon with nickname nn is in ranch, deletes that Pokemon from the ranch,
-    //            deletes that Pokemon from any team that it is in, and returns true,
-    //          otherwise returns false
-    public boolean deletePokemon(String nn) {
-        for (Pokemon p : ranch) {
-            if (p.getNickname().equals(nn)) {
-                for (Team t : teams) {
-                    t.removePokemon(p);
-                }
-                ranch.remove(p);
-                return true;
-            }
-        }
-        return false;
-    }
-
+    // Other Methods ---------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
         return name + " the Trainer!"

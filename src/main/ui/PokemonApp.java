@@ -306,6 +306,7 @@ public class PokemonApp {
             System.out.println("Duplicate nickname, please try again");
             newNickname = input.next();
         }
+        p.setNickname(newNickname);
     }
 
     // MODIFIES: this
@@ -479,10 +480,16 @@ public class PokemonApp {
     private void addPokemonToTeam(Team t) {
         if (myTrainer.hasZeroTeams()) {
             System.out.println("You can't add a Pokemon to your team because you don't have any!");
+        } else if (t.isMaxSize()) {
+            System.out.println("This team is full!");
         } else {
-            System.out.println("Which Pokemon would you like to add? (type the Pokemon's nickname below");
+            System.out.println("Which Pokemon would you like to add? (type the Pokemon's nickname below)");
             Pokemon p = getUserPokemon();
-            myTrainer.addPokemonToTeam(p, t.getName());
+            if (t.containsPokemon(p)) {
+                System.out.println(p + " is already on this team!");
+            } else {
+                myTrainer.addPokemonToTeam(p, t.getName());
+            }
         }
     }
 
@@ -500,15 +507,13 @@ public class PokemonApp {
 
     // EFFECTS: asks user for a valid nickname, then returns the Pokemon with that nickname
     private Pokemon getUserPokemon() {
-        Pokemon userPokemon = null;
         System.out.println(myTrainer.displayRanch());
         String pokeNickname = input.next();
         while (!myTrainer.getAllPokemonNicknames().contains(pokeNickname)) {
             System.out.println("Invalid nickname, please try again");
             pokeNickname = input.next();
         }
-        userPokemon = myTrainer.getPokemonFromNickname(pokeNickname);
-        return userPokemon;
+        return myTrainer.getPokemonFromNickname(pokeNickname);
     }
 
     // EFFECTS: asks user for a valid nickname on a team, then returns the Pokemon with that nickname

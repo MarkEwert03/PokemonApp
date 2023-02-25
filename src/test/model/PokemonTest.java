@@ -14,6 +14,7 @@ public class PokemonTest {
     Pokemon zard;
     Pokemon cannon;
     Pokemon angel;
+    Pokemon unknownGender;
 
     @BeforeEach
     void setup() {
@@ -23,6 +24,9 @@ public class PokemonTest {
         zard = new Pokemon(CHARIZARD, "Zard", false, MALE);
         cannon = new Pokemon(BLASTOISE, "Cannon", true, MALE);
         angel = new Pokemon(PIDGEOTTO, "Angel", true, FEMALE);
+        unknownGender = new Pokemon(BULBASAUR, "UG", false, UNKNOWN);
+
+
     }
 
     @Test
@@ -49,6 +53,38 @@ public class PokemonTest {
         assertEquals(MALE, cannon.getGender());
         cannon.setGender(FEMALE);
         assertEquals(FEMALE, cannon.getGender());
+    }
+    @Test
+    void testIsValidSpecies() {
+        assertTrue(Pokemon.isValidSpecies("bulbasaur"));
+        assertTrue(Pokemon.isValidSpecies("Charmander"));
+        assertTrue(Pokemon.isValidSpecies("SqUiRtLe"));
+        assertFalse(Pokemon.isValidSpecies("pika chu"));
+        assertFalse(Pokemon.isValidSpecies("pokeman"));
+    }
+
+    @Test
+    void testSummary() {
+        String weedleSummary = "Nickname: Weedle\nSpecies: Weedle\nGender: ♂\nShiny Status: NOT SHINY";
+        assertEquals(weedleSummary, weedle.summary());
+
+        String angelSummary = "Nickname: Angel\nSpecies: Pidgeotto\nGender: ♀\nShiny Status: ⭐SHINY⭐";
+        assertEquals(angelSummary, angel.summary());
+
+        String ugSummary = "Nickname: UG\nSpecies: Bulbasaur\nGender: ?\nShiny Status: NOT SHINY";
+        assertEquals(ugSummary, unknownGender.summary());
+    }
+
+    @Test
+    void testOneLineSummary() {
+        String weedleSummary = "Nickname: Weedle Species: Weedle Gender: ♂ Shiny Status: NOT SHINY";
+        assertEquals(weedleSummary, weedle.oneLineSummary(6, 6));
+
+        String flowerSummary = "Nickname: Flower   Species: Raichu  Gender: ♀ Shiny Status: NOT SHINY";
+        assertEquals(flowerSummary, flower.oneLineSummary(7, 8));
+
+        String ugSummary = "Nickname: UG         Species: Bulbasaur  Gender: ? Shiny Status: NOT SHINY";
+        assertEquals(ugSummary, unknownGender.oneLineSummary(10, 10));
     }
 
     @Test
