@@ -68,6 +68,7 @@ public class Trainer {
                 return p;
             }
         }
+
         return null;
     }
 
@@ -105,16 +106,18 @@ public class Trainer {
     }
 
     // EFFECTS: produces a detailed summary of all the Pokemon in the ranch
-    public String detailedRanchSummary(int longestSpec, int longestNick) {
+    public String detailedRanchSummary() {
+        int longestSpec = getLongestSpeciesName();
+        int longestNick = getLongestNickname();
         StringBuilder detailedSummary = new StringBuilder();
         for (Pokemon p : ranch) {
-            detailedSummary.append(p.oneLineSummary(longestSpec, longestNick)).append("\n");
+            detailedSummary.append("\n").append(p.oneLineSummary(longestSpec, longestNick));
         }
         return detailedSummary.toString();
     }
 
     // EFFECTS: returns the longest species name of Pokemon in trainer's ranch, 0 if ranch is empty
-    public int getLongestSpeciesName() {
+    private int getLongestSpeciesName() {
         int longestSpecies = 0;
         for (Pokemon p : ranch) {
             longestSpecies = Math.max(longestSpecies, p.getSpecies().name().length());
@@ -123,7 +126,7 @@ public class Trainer {
     }
 
     // EFFECTS: returns the longest nickname of Pokemon in trainer's ranch, 0 if ranch is empty
-    public int getLongestNickname() {
+    private int getLongestNickname() {
         int longestNickname = 0;
         for (Pokemon p : ranch) {
             longestNickname = Math.max(longestNickname, p.getNickname().length());
@@ -150,6 +153,7 @@ public class Trainer {
                 return t;
             }
         }
+
         return null;
     }
 
@@ -224,6 +228,7 @@ public class Trainer {
     @Override
     public String toString() {
         return name + " the Trainer!"
+                + "\n- Gender: " + gender.name()
                 + "\n- Pokemon caught: " + ranch.size()
                 + "\n- Teams created: " + teams.size();
     }

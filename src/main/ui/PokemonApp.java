@@ -18,7 +18,7 @@ public class PokemonApp {
     // EFFECTS: processes the users input
     private void runPokemon() {
         boolean keepGoing = true;
-        String command = null;
+        String command;
 
         System.out.println("\nWelcome Trainer! In this program you will be able to create your very own dream team "
                 + "of Pokemon!");
@@ -223,8 +223,7 @@ public class PokemonApp {
             System.out.println("Your ranch is empty! Make a Pokemon first!");
         } else {
             System.out.println("You have " + myTrainer.numberPokemon() + " Pokemon:");
-            System.out.println(myTrainer.detailedRanchSummary(myTrainer.getLongestSpeciesName(),
-                    myTrainer.getLongestNickname()));
+            System.out.println(myTrainer.detailedRanchSummary());
         }
     }
 
@@ -300,7 +299,7 @@ public class PokemonApp {
     // MODIFIES: this
     // EFFECTS: allows user to change the nickname of p
     private void changePokemonNickname(Pokemon p) {
-        System.out.println("What would you like to change " + p.getNickname() + "\'s nickname to?");
+        System.out.println("What would you like to change " + p.getNickname() + "'s nickname to?");
         String newNickname = input.next();
         while (myTrainer.getAllPokemonNicknames().contains(newNickname)) {
             System.out.println("Duplicate nickname, please try again");
@@ -312,8 +311,8 @@ public class PokemonApp {
     // MODIFIES: this
     // EFFECTS: allows user to change the gender of p
     private void changePokemonGender(Pokemon p) {
-        System.out.println(p.getNickname() + "\'s current gender is " + p.getGender()
-                + ". What do you want to change " + p + "\'s gender to? Select from:");
+        System.out.println(p.getNickname() + "'s current gender is " + p.getGender()
+                + ". What do you want to change " + p + "'s gender to? Select from:");
         System.out.println("- m -> male");
         System.out.println("- f -> female");
         System.out.println("- u -> unknown");
@@ -478,7 +477,7 @@ public class PokemonApp {
 
     // EFFECTS: allows user to add a Pokemon not already given team to the team
     private void addPokemonToTeam(Team t) {
-        if (myTrainer.hasZeroTeams()) {
+        if (myTrainer.hasZeroPokemon()) {
             System.out.println("You can't add a Pokemon to your team because you don't have any!");
         } else if (t.isMaxSize()) {
             System.out.println("This team is full!");
@@ -518,7 +517,7 @@ public class PokemonApp {
 
     // EFFECTS: asks user for a valid nickname on a team, then returns the Pokemon with that nickname
     private Pokemon getUserPokemonOnTeam(Team t) {
-        Pokemon userPokemon = null;
+        Pokemon userPokemon;
         System.out.println(t.summary());
         String pokeNickname = input.next();
         while (!t.containsPokemon(myTrainer.getPokemonFromNickname(pokeNickname))) {
@@ -531,15 +530,13 @@ public class PokemonApp {
 
     // EFFECTS: helper method that asks user for a valid team name, then returns the team with that name
     private Team getUserTeam() {
-        Team userTeam = null;
         System.out.println(myTrainer.displayTeams());
         String teamName = input.next();
         while (!myTrainer.getAllTeamNames().contains(teamName)) {
             System.out.println("Invalid team name, please try again");
             teamName = input.next();
         }
-        userTeam = myTrainer.getTeamFromName(teamName);
-        return userTeam;
+        return myTrainer.getTeamFromName(teamName);
     }
 
     private boolean userConformation() {
