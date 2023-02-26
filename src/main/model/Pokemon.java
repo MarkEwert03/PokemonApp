@@ -87,8 +87,9 @@ public class Pokemon {
     // EFFECTS: displays the summary of this Pokemon in one line with spacing based on longestSpec and longestNick
     public String oneLineSummary(int longestSpec, int longestNick) {
         String summary = "";
-        summary += "Nickname: " + nickname + " ".repeat(longestNick - nickname.length());
-        summary += " Species: " + capitalize(species.name()) + " ".repeat(longestSpec - species.name().length());
+        summary += "Nickname: " + nickname + repeatString(longestNick - nickname.length(), " ");
+        summary += " Species: " + capitalize(species.name())
+                + repeatString(longestSpec - species.name().length(), " ");
         summary += " Gender: " + getGenderSymbol();
         summary += " Shiny Status: " + getShinySymbol();
         return summary;
@@ -112,6 +113,15 @@ public class Pokemon {
         } else {
             return "?";
         }
+    }
+
+    // EFFECTS returns str n number of times
+    public static String repeatString(int n, String str) {
+        StringBuilder rep = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            rep.append(str);
+        }
+        return rep.toString();
     }
 
     // EFFECTS: helper method that makes the first letter of str upper case, and makes the rest lower
