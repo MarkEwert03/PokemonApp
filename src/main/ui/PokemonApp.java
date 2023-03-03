@@ -539,6 +539,7 @@ public class PokemonApp {
         return myTrainer.getTeamFromName(teamName);
     }
 
+    // EFFECTS: prompts user to confirm the action they are about to make
     private boolean userConformation() {
         System.out.println("Are you sure? This action can not be undone... Please confirm Y/N");
         String confirm = input.next().toUpperCase();

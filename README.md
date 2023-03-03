@@ -32,4 +32,6 @@ it!
 - As a user, I want to be able to remove a Pokémon from a specific team
 - As a user, I want to be able to pick a team, and see all the Pokémon on it
 - As a user, I want to be able to be able to set certain attributes for each Pokémon on my team
+- As a user, I want to be able to save the current state of my ranch and list of teams
+- As a user, I want to be able to choose to reload that previous save state when I reopen my project, or start fresh
 - As a user, I want to see a rendering of me, the trainer, along with all my Pokémon on the team

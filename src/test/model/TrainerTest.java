@@ -237,11 +237,6 @@ public class TrainerTest {
     }
 
     @Test
-    void testGetAllTeamNames() {
-
-    }
-
-    @Test
     void testMakeTeam() {
         assertEquals("You have 0 teams:", beginnerTrainer.displayTeams());
         beginnerTrainer.makeTeam("Epic Team");
