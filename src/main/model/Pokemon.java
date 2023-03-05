@@ -1,7 +1,11 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a specific Pokemon that can be added to teams
-public class Pokemon {
+public class Pokemon implements Writable {
     // Fields ----------------------------------------------------------------------------------------------------------
     private final Species species;
     private String nickname;
@@ -117,7 +121,21 @@ public class Pokemon {
         }
         return rep.toString();
     }
+    // Methods ----------------------------------------------------------------------------------------------------
 
+    // JSON Methods ----------------------------------------------------------------------------------------------------
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("species", species);
+        json.put("nickname", nickname);
+        json.put("gender", gender);
+        json.put("shiny", shiny);
+        return json;
+    }
+    // JSON Methods ----------------------------------------------------------------------------------------------------
+
+    // Other Methods ---------------------------------------------------------------------------------------------------
     // EFFECTS: helper method that makes the first letter of str upper case, and makes the rest lower
     private String capitalize(String str) {
         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
@@ -127,4 +145,5 @@ public class Pokemon {
     public String toString() {
         return nickname + " the " + capitalize(species.toString());
     }
+    // Other Methods ---------------------------------------------------------------------------------------------------
 }

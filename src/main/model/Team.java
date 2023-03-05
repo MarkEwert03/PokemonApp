@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.*;
 
 // Represents a team with name, and up to TEAM_SIZE number of Pokemon
-public class Team {
+public class Team implements Writable {
     // Fields ----------------------------------------------------------------------------------------------------------
     public static final int TEAM_SIZE = 6;
     private String name;
@@ -120,9 +124,32 @@ public class Team {
             return false;
         }
     }
+    // Methods ---------------------------------------------------------------------------------------------------------
 
+    // JSON Methods ----------------------------------------------------------------------------------------------------
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("teamName", name);
+        json.put("allTeamPokemon", pokemonToJson());
+        return json;
+    }
+
+    // EFFECTS: returns Pokemon in the team as a JSON array
+    private JSONArray pokemonToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Pokemon p : roster) {
+            jsonArray.put(p.toJson());
+        }
+        return jsonArray;
+    }
+    // JSON Methods ----------------------------------------------------------------------------------------------------
+
+    // Other Methods ---------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
         return name + " (" + length() + " Pokemon)";
     }
+    // Other Methods ---------------------------------------------------------------------------------------------------
 }

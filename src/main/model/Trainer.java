@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -186,6 +187,13 @@ public class Trainer implements Writable {
         teams.add(new Team(teamName));
     }
 
+    // REQUIRES: team name of te is not same name as any other Team in teams
+    // MODIFIES: this
+    // EFFECTS: adds te to trainers list of teams
+    public void addTeam(Team te) {
+        teams.add(te);
+    }
+
     // REQUIRES: p is in ranch
     // MODIFIES: this
     // EFFECTS: if teamName is name of one of the Trainer's teams and Pokemon p is not in that team,
@@ -241,7 +249,32 @@ public class Trainer implements Writable {
     // JSON Methods ----------------------------------------------------------------------------------------------------
     @Override
     public JSONObject toJson() {
-        return new JSONObject(); //stub
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("gender", gender);
+        json.put("allRanchPokemon", pokemonToJson());
+        json.put("allTeams", teamsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns Pokemon in trainer's ranch as a JSON array
+    private JSONArray pokemonToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Pokemon p : ranch) {
+            jsonArray.put(p.toJson());
+        }
+        return jsonArray;
+    }
+
+    // EFFECTS: returns the trainer's teams as a JSON array
+    private JSONArray teamsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Team t : teams) {
+            jsonArray.put(t.toJson());
+        }
+        return jsonArray;
     }
     // JSON Methods ----------------------------------------------------------------------------------------------------
 
