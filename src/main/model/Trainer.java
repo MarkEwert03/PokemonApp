@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.sql.Wrapper;
 import java.util.*;
 
 // Represents a trainer with a name, gender, list of caught Pokemon, and list of Teams
-public class Trainer {
+public class Trainer implements Writable {
     // Fields ----------------------------------------------------------------------------------------------------------
     private String name;
     private Gender gender;
@@ -15,6 +19,13 @@ public class Trainer {
     }
 
     // Constructors ----------------------------------------------------------------------------------------------------
+    public Trainer(String name) {
+        this.name = name;
+        gender = Gender.OTHER;
+        ranch = new ArrayList<>();
+        teams = new ArrayList<>();
+    }
+
     public Trainer(String name, Gender gender) {
         this.name = name;
         this.gender = gender;
@@ -38,6 +49,7 @@ public class Trainer {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+    // Getters and Setters ---------------------------------------------------------------------------------------------
 
     // Pokemon Methods -------------------------------------------------------------------------------------------------
 
@@ -133,6 +145,7 @@ public class Trainer {
         }
         return longestNickname;
     }
+    // Pokemon Methods -------------------------------------------------------------------------------------------------
 
     // Team Methods ----------------------------------------------------------------------------------------------------
     // EFFECTS: returns the number of teams the trainer has
@@ -223,6 +236,14 @@ public class Trainer {
         }
         return detailedSummary.toString();
     }
+    // Team Methods ----------------------------------------------------------------------------------------------------
+
+    // JSON Methods ----------------------------------------------------------------------------------------------------
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject(); //stub
+    }
+    // JSON Methods ----------------------------------------------------------------------------------------------------
 
     // Other Methods ---------------------------------------------------------------------------------------------------
     @Override
@@ -232,4 +253,5 @@ public class Trainer {
                 + "\n- Pokemon caught: " + ranch.size()
                 + "\n- Teams created: " + teams.size();
     }
+    // Other Methods ---------------------------------------------------------------------------------------------------
 }

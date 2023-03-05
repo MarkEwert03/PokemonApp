@@ -213,7 +213,7 @@ public class PokemonApp {
             pokeNickname = input.next();
         }
 
-        myTrainer.addPokemonToRanch(new Pokemon(Pokemon.Species.valueOf(pokeSpecies.toUpperCase()), pokeNickname,
+        myTrainer.addPokemonToRanch(new Pokemon(Species.valueOf(pokeSpecies.toUpperCase()), pokeNickname,
                 false, Pokemon.Gender.MALE));
     }
 

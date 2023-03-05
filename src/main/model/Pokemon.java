@@ -8,12 +8,6 @@ public class Pokemon {
     private boolean shiny;
     private Gender gender;
 
-    public enum Species {
-        BULBASAUR, IVYSAUR, VENUSAUR, CHARMANDER, CHARMELEON, CHARIZARD, SQUIRTLE, WARTORTLE, BLASTOISE, CATERPIE,
-        METAPOD, BUTTERFREE, WEEDLE, KAKUNA, BEEDRILL, PIDGEY, PIDGEOTTO, PIDGEOT, RATTATA, RATICATE, SPEAROW, FEAROW,
-        EKANS, ARBOK, PIKACHU, RAICHU
-    }
-
     public enum Gender {
         MALE, FEMALE, UNKNOWN
     }

@@ -30,24 +30,24 @@ class TeamTest {
         emptyTeam = new Team("Empty");
 
         singleTeam = new Team("Single");
-        pika = new Pokemon(Pokemon.Species.PIKACHU);
+        pika = new Pokemon(Species.PIKACHU);
         singleTeam.addPokemon(pika);
 
         multipleTeam = new Team("Multiple");
-        bulba = new Pokemon(Pokemon.Species.BULBASAUR);
-        charm = new Pokemon(Pokemon.Species.CHARMANDER);
-        squirt = new Pokemon(Pokemon.Species.SQUIRTLE);
+        bulba = new Pokemon(Species.BULBASAUR);
+        charm = new Pokemon(Species.CHARMANDER);
+        squirt = new Pokemon(Species.SQUIRTLE);
         multipleTeam.addPokemon(bulba);
         multipleTeam.addPokemon(charm);
         multipleTeam.addPokemon(squirt);
 
         fullTeam = new Team("Full");
-        cater = new Pokemon(Pokemon.Species.CATERPIE);
-        meta = new Pokemon(Pokemon.Species.METAPOD);
-        butter = new Pokemon(Pokemon.Species.BUTTERFREE);
-        pid = new Pokemon(Pokemon.Species.PIDGEY);
-        rat = new Pokemon(Pokemon.Species.RATTATA);
-        fear = new Pokemon(Pokemon.Species.FEAROW);
+        cater = new Pokemon(Species.CATERPIE);
+        meta = new Pokemon(Species.METAPOD);
+        butter = new Pokemon(Species.BUTTERFREE);
+        pid = new Pokemon(Species.PIDGEY);
+        rat = new Pokemon(Species.RATTATA);
+        fear = new Pokemon(Species.FEAROW);
         fullTeam.addPokemon(cater);
         fullTeam.addPokemon(meta);
         fullTeam.addPokemon(butter);
@@ -109,7 +109,7 @@ class TeamTest {
 
     @Test
     void testAddPokemonEmptyTeam() {
-        Pokemon testP = new Pokemon(Pokemon.Species.EKANS);
+        Pokemon testP = new Pokemon(Species.EKANS);
         assertTrue(emptyTeam.addPokemon(testP));
         assertFalse(emptyTeam.isEmpty());
         assertEquals(1, emptyTeam.length());
@@ -117,7 +117,7 @@ class TeamTest {
 
     @Test
     void testAddPokemonFullTeam() {
-        Pokemon testP = new Pokemon(Pokemon.Species.ARBOK);
+        Pokemon testP = new Pokemon(Species.ARBOK);
         assertFalse(fullTeam.addPokemon(testP));
         assertTrue(fullTeam.isMaxSize());
         assertEquals(TEAM_SIZE, fullTeam.length());

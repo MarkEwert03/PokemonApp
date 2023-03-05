@@ -3,7 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static model.Pokemon.Species.*;
+import static model.Species.*;
 import static model.Pokemon.Gender.*;
 import static org.junit.jupiter.api.Assertions.*;
 

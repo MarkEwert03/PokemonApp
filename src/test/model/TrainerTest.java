@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static model.Trainer.Gender.*;
-import static model.Pokemon.Species.*;
+import static model.Species.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
