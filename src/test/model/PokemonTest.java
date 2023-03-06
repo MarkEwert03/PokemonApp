@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -85,6 +86,15 @@ public class PokemonTest {
 
         String ugSummary = "Nickname: UG         Species: Bulbasaur  Gender: ? Shiny Status: NOT SHINY";
         assertEquals(ugSummary, unknownGender.oneLineSummary(10, 10));
+    }
+
+    @Test
+    void testToJson() {
+        String weedleJson = "{\"gender\":\"MALE\",\"species\":\"WEEDLE\",\"nickname\":\"Weedle\",\"shiny\":false}";
+        assertEquals(weedleJson, weedle.toJson().toString());
+
+        String pidJson = "{\"gender\":\"FEMALE\",\"species\":\"PIDGEOTTO\",\"nickname\":\"Angel\",\"shiny\":true}";
+        assertEquals(pidJson, angel.toJson().toString());
     }
 
     @Test

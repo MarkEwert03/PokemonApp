@@ -124,7 +124,7 @@ public class Trainer implements Writable {
         int longestNick = getLongestNickname();
         StringBuilder detailedSummary = new StringBuilder();
         for (Pokemon p : ranch) {
-            detailedSummary.append("\n").append(p.oneLineSummary(longestSpec, longestNick));
+            detailedSummary.append(p.oneLineSummary(longestSpec, longestNick)).append("\n");
         }
         return detailedSummary.toString();
     }
@@ -240,7 +240,7 @@ public class Trainer implements Writable {
     public String detailedListOfTeamsSummary() {
         StringBuilder detailedSummary = new StringBuilder();
         for (Team t : teams) {
-            detailedSummary.append("\n").append(t.oneLineSummary());
+            detailedSummary.append(t.oneLineSummary()).append("\n");
         }
         return detailedSummary.toString();
     }

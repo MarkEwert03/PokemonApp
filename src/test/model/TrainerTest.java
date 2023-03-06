@@ -205,11 +205,11 @@ public class TrainerTest {
     @Test
     void testDetailedRanchSummary() {
         assertEquals("", beginnerTrainer.detailedRanchSummary());
-        String summary1 = "\n" + caterpie.oneLineSummary(8, 8);
+        String summary1 = caterpie.oneLineSummary(8, 8) +"\n";
         assertEquals(summary1, onePokemonTrainer.detailedRanchSummary());
-        String summary2 = "\n" + beedrill.oneLineSummary(8, 8);
-        summary2 += "\n" + raticate.oneLineSummary(8, 8);
-        summary2 += "\n" + spearow.oneLineSummary(8, 8);
+        String summary2 = beedrill.oneLineSummary(8, 8) + "\n";
+        summary2 += raticate.oneLineSummary(8, 8) + "\n";
+        summary2 += spearow.oneLineSummary(8, 8) + "\n";
         assertEquals(summary2, advancedTrainer.detailedRanchSummary());
     }
 
@@ -287,9 +287,9 @@ public class TrainerTest {
     @Test
     void testDetailedListOfTeamsSummary() {
         assertEquals("", beginnerTrainer.detailedListOfTeamsSummary());
-        assertEquals("\n Empty Team is empty", emptyTeamTrainer.detailedListOfTeamsSummary());
-        String lotSummary = "\nAdvanced Team A:  (1) Beedrill the Beedrill";
-        lotSummary += "\nAdvanced Team B:  (1) Raticate the Raticate (2) Spearow the Spearow";
+        assertEquals("Empty Team is empty\n", emptyTeamTrainer.detailedListOfTeamsSummary());
+        String lotSummary = "Advanced Team A:  (1) Beedrill the Beedrill";
+        lotSummary += "\nAdvanced Team B:  (1) Raticate the Raticate (2) Spearow the Spearow\n";
         assertEquals(lotSummary, advancedTrainer.detailedListOfTeamsSummary());
     }
 

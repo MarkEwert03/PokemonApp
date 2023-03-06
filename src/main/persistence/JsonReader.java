@@ -62,7 +62,7 @@ public class JsonReader {
 
     // EFFECTS: returns a parsed a Pokemon from JSON object
     private Pokemon getPokemonToAdd(JSONObject jsonObject) {
-        Species species = Species.valueOf(jsonObject.getString("category"));
+        Species species = Species.valueOf(jsonObject.getString("species"));
         String nickname = jsonObject.getString("nickname");
         boolean shiny = jsonObject.getBoolean("shiny");
         Pokemon.Gender gender = Pokemon.Gender.valueOf(jsonObject.getString("gender"));

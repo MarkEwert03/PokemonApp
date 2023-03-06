@@ -66,7 +66,7 @@ public class Team implements Writable {
     // EFFECTS: displays the summary of this Team in one line
     public String oneLineSummary() {
         if (isEmpty()) {
-            return " " + name + " is empty";
+            return name + " is empty";
         } else {
             StringBuilder output = new StringBuilder(name + ": ");
             for (int i = 0; i < length(); i++) {

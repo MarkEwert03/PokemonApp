@@ -95,7 +95,7 @@ class TeamTest {
 
     @Test
     void testOneLineSummary() {
-        assertEquals(" Empty is empty", emptyTeam.oneLineSummary());
+        assertEquals("Empty is empty", emptyTeam.oneLineSummary());
         String mult = "Multiple:  (1) Bulbasaur the Bulbasaur (2) Charmander the Charmander (3) Squirtle the Squirtle";
         assertEquals(mult, multipleTeam.oneLineSummary());
     }

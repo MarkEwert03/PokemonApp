@@ -1,16 +1,23 @@
 package ui;
 
 import model.*;
+import persistence.*;
 
+import java.io.*;
 import java.util.*;
 
 // Pokemon team builder application
 public class PokemonApp {
+    private static final String JSON_STORE = "./data/trainer.json";
     private Trainer myTrainer;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the Pokemon app
-    public PokemonApp() {
+    public PokemonApp() throws FileNotFoundException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runPokemon();
     }
 
@@ -64,11 +71,14 @@ public class PokemonApp {
         System.out.println("- p -> modify one of your Pokemon");
         System.out.println("- l -> customize your list of Teams");
         System.out.println("- t -> modify one of your teams");
+        System.out.println("- s -> save your trainer information to a file");
+        System.out.println("- o -> open and load your trainer information from a file");
         System.out.println("- q -> quit the application");
     }
 
     // MODIFIES: this
     // EFFECTS: processes the users command
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void processCommand(String command) {
         switch (command) {
             case "d":
@@ -88,6 +98,12 @@ public class PokemonApp {
                 break;
             case "t":
                 pickTeamToModify();
+                break;
+            case "s":
+                saveTrainer();
+                break;
+            case "o":
+                openTrainer();
                 break;
             default:
                 System.out.println("Selection not valid, please try again");
@@ -503,6 +519,30 @@ public class PokemonApp {
         }
     }
     //Main Menu - Team-------------------------------------------------------------------------------------------
+
+    // EFFECTS: saves the trainer to file
+    private void saveTrainer() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myTrainer);
+            jsonWriter.close();
+            System.out.println("Saved " + myTrainer.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: opens and loads trainer from file
+    private void openTrainer() {
+        try {
+            myTrainer = jsonReader.read();
+            System.out.println("Loaded " + myTrainer.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+    // SAVE/LOAD -------------------------------------------------------------------------------------------------------
 
     // EFFECTS: asks user for a valid nickname, then returns the Pokemon with that nickname
     private Pokemon getUserPokemon() {
