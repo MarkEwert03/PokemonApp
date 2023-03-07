@@ -1,0 +1,11 @@
+{
+    "gender": "OTHER",
+    "name": "Mark",
+    "allTeams": [],
+    "allRanchPokemon": [{
+        "gender": "MALE",
+        "species": "PIKACHU",
+        "nickname": "pika",
+        "shiny": false
+    }]
+}

@@ -1,0 +1,52 @@
+{
+    "gender": "FEMALE",
+    "name": "Advanced Girl",
+    "allTeams": [
+        {
+            "teamName": "Advanced Team A",
+            "allTeamPokemon": [{
+                "gender": "MALE",
+                "species": "BEEDRILL",
+                "nickname": "Beedrill",
+                "shiny": false
+            }]
+        },
+        {
+            "teamName": "Advanced Team B",
+            "allTeamPokemon": [
+                {
+                    "gender": "MALE",
+                    "species": "RATICATE",
+                    "nickname": "Raticate",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "SPEAROW",
+                    "nickname": "Spearow",
+                    "shiny": false
+                }
+            ]
+        }
+    ],
+    "allRanchPokemon": [
+        {
+            "gender": "MALE",
+            "species": "BEEDRILL",
+            "nickname": "Beedrill",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "RATICATE",
+            "nickname": "Raticate",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "SPEAROW",
+            "nickname": "Spearow",
+            "shiny": false
+        }
+    ]
+}

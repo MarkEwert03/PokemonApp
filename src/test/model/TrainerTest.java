@@ -246,6 +246,12 @@ public class TrainerTest {
     }
 
     @Test
+    void testAddTeam() {
+        beginnerTrainer.addTeam(new Team("New Empty Team"));
+        assertEquals(1, beginnerTrainer.numberTeams());
+    }
+
+    @Test
     void testAddPokemonToTeamWrongTeamName() {
         Pokemon testP = new Pokemon(PIKACHU);
         assertFalse(masterTrainer.addPokemonToTeam(testP, "Fizz"));

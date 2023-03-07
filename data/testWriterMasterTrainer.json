@@ -1,0 +1,172 @@
+{
+    "gender": "MALE",
+    "name": "Master Boy",
+    "allTeams": [
+        {
+            "teamName": "Master Grass Team",
+            "allTeamPokemon": [
+                {
+                    "gender": "MALE",
+                    "species": "BULBASAUR",
+                    "nickname": "Bulbasaur",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "IVYSAUR",
+                    "nickname": "Ivysaur",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "VENUSAUR",
+                    "nickname": "Venusaur",
+                    "shiny": false
+                }
+            ]
+        },
+        {
+            "teamName": "Master Fire Team",
+            "allTeamPokemon": [
+                {
+                    "gender": "MALE",
+                    "species": "CHARMANDER",
+                    "nickname": "Charmander",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "CHARMELEON",
+                    "nickname": "Charmeleon",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "CHARIZARD",
+                    "nickname": "Charizard",
+                    "shiny": false
+                }
+            ]
+        },
+        {
+            "teamName": "Master Water Team",
+            "allTeamPokemon": [
+                {
+                    "gender": "MALE",
+                    "species": "SQUIRTLE",
+                    "nickname": "Squirtle",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "WARTORTLE",
+                    "nickname": "Wartortle",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "BLASTOISE",
+                    "nickname": "Blastoise",
+                    "shiny": false
+                }
+            ]
+        },
+        {
+            "teamName": "Grandmaster Team",
+            "allTeamPokemon": [
+                {
+                    "gender": "MALE",
+                    "species": "IVYSAUR",
+                    "nickname": "Ivysaur",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "VENUSAUR",
+                    "nickname": "Venusaur",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "CHARMELEON",
+                    "nickname": "Charmeleon",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "CHARIZARD",
+                    "nickname": "Charizard",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "WARTORTLE",
+                    "nickname": "Wartortle",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "BLASTOISE",
+                    "nickname": "Blastoise",
+                    "shiny": false
+                }
+            ]
+        }
+    ],
+    "allRanchPokemon": [
+        {
+            "gender": "MALE",
+            "species": "BULBASAUR",
+            "nickname": "Bulbasaur",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "IVYSAUR",
+            "nickname": "Ivysaur",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "VENUSAUR",
+            "nickname": "Venusaur",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "CHARMANDER",
+            "nickname": "Charmander",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "CHARMELEON",
+            "nickname": "Charmeleon",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "CHARIZARD",
+            "nickname": "Charizard",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "SQUIRTLE",
+            "nickname": "Squirtle",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "WARTORTLE",
+            "nickname": "Wartortle",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "BLASTOISE",
+            "nickname": "Blastoise",
+            "shiny": false
+        }
+    ]
+}
