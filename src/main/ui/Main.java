@@ -1,8 +1,6 @@
 package ui;
 
-import model.Pokemon;
-import model.Team;
-import model.Trainer;
+import ui.console.PokemonApp;
 
 import java.io.FileNotFoundException;
 
