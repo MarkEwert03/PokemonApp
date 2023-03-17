@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
-// Represents a specific Pokemon that can be added to teams
+// Represents a specific Pokemon with species, nickname, gender, and shiny status
 public class Pokemon implements Writable {
     // Fields ----------------------------------------------------------------------------------------------------------
     private final Species species;
@@ -17,6 +17,7 @@ public class Pokemon implements Writable {
     }
 
     // Constructors ----------------------------------------------------------------------------------------------------
+    // EFFECTS: constructs a Pokemon with given species and default nickname, gender, and shiny status
     public Pokemon(Species species) {
         this.species = species;
         this.nickname = capitalize(species.toString());
@@ -24,44 +25,56 @@ public class Pokemon implements Writable {
         this.gender = Gender.MALE;
     }
 
+    // EFFECTS: constructs a Pokemon with given species, nickname, gender, and shiny status
     public Pokemon(Species species, String nickname, boolean shiny, Gender gender) {
         this.species = species;
         this.nickname = nickname;
         this.shiny = shiny;
         this.gender = gender;
     }
+    // Constructors ----------------------------------------------------------------------------------------------------
 
     // Getters and Setters ---------------------------------------------------------------------------------------------
+    // EFFECTS: produces the species of the Pokemon
     public Species getSpecies() {
         return species;
     }
 
+    // EFFECTS: produces the nickname of the Pokemon
     public String getNickname() {
         return nickname;
     }
 
+    // EFFECTS: produces the shiny status of the Pokemon
     public boolean getShiny() {
         return shiny;
     }
 
+    // EFFECTS: produces the gender of the Pokemon
     public Gender getGender() {
         return gender;
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the nickname of the Pokemon to given nickname
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the shiny status of the Pokemon to given shiny status
     public void setShiny(boolean shiny) {
         this.shiny = shiny;
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the gender of the Pokemon to given gender
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+    // Getters and Setters ---------------------------------------------------------------------------------------------
 
     // Methods ---------------------------------------------------------------------------------------------------------
-
     // EFFECTS: returns true if spec is a valid Pokemon species
     public static boolean isValidSpecies(String spec) {
         for (Species s : Species.values()) {
@@ -121,9 +134,10 @@ public class Pokemon implements Writable {
         }
         return rep.toString();
     }
-    // Methods ----------------------------------------------------------------------------------------------------
+    // Methods ---------------------------------------------------------------------------------------------------------
 
     // JSON Methods ----------------------------------------------------------------------------------------------------
+    // EFFECTS: produces the json representation of the Pokemon
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -141,6 +155,7 @@ public class Pokemon implements Writable {
         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
 
+    // EFFECTS: produces simple string representation of the Pokemon
     @Override
     public String toString() {
         return nickname + " the " + capitalize(species.toString());

@@ -1,11 +1,35 @@
 {
     "gender": "OTHER",
-    "name": "Mark",
-    "allTeams": [],
-    "allRanchPokemon": [{
-        "gender": "MALE",
-        "species": "PIKACHU",
-        "nickname": "pika",
-        "shiny": false
-    }]
+    "name": "Nathan",
+    "allTeams": [{
+        "teamName": "Team1",
+        "allTeamPokemon": [
+            {
+                "gender": "MALE",
+                "species": "PIKACHU",
+                "nickname": "Pika",
+                "shiny": false
+            },
+            {
+                "gender": "MALE",
+                "species": "SQUIRTLE",
+                "nickname": "WaterBoy",
+                "shiny": false
+            }
+        ]
+    }],
+    "allRanchPokemon": [
+        {
+            "gender": "MALE",
+            "species": "PIKACHU",
+            "nickname": "Pika",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "SQUIRTLE",
+            "nickname": "WaterBoy",
+            "shiny": false
+        }
+    ]
 }

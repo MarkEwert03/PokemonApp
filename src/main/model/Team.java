@@ -14,22 +14,27 @@ public class Team implements Writable {
     private List<Pokemon> roster;
 
     // Constructors ----------------------------------------------------------------------------------------------------
+    // EFFECTS: constructs a team with given name
     public Team(String name) {
         this.name = name;
         roster = new ArrayList<>();
     }
+    // Constructors ----------------------------------------------------------------------------------------------------
 
     // Getters and Setters ---------------------------------------------------------------------------------------------
+    // EFFECTS: produces the name of the team
     public String getName() {
         return name;
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the name of the team to given name
     public void setName(String name) {
         this.name = name;
     }
+    // Getters and Setters ---------------------------------------------------------------------------------------------
 
     // Methods ---------------------------------------------------------------------------------------------------------
-
     // EFFECTS: returns the number of Pokemon in the team
     public int length() {
         return roster.size();
@@ -127,6 +132,7 @@ public class Team implements Writable {
     // Methods ---------------------------------------------------------------------------------------------------------
 
     // JSON Methods ----------------------------------------------------------------------------------------------------
+    // EFFECTS: produces the json representation of the team
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -147,6 +153,7 @@ public class Team implements Writable {
     // JSON Methods ----------------------------------------------------------------------------------------------------
 
     // Other Methods ---------------------------------------------------------------------------------------------------
+    // produces simple text representation of team
     @Override
     public String toString() {
         return name + " (" + length() + " Pokemon)";

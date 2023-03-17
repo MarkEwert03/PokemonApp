@@ -14,6 +14,7 @@ public class PokemonApp {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
+    //General ----------------------------------------------------------------------------------------------------------
     // EFFECTS: runs the Pokemon app
     public PokemonApp() throws FileNotFoundException {
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -61,7 +62,9 @@ public class PokemonApp {
         System.out.println("\nPerfect! Nice to meet you " + trainerName
                 + "! Have fun making Pokemon teams!");
     }
+    //General ----------------------------------------------------------------------------------------------------------
 
+    //Main Menu --------------------------------------------------------------------------------------------------------
     // EFFECTS: displays menu of options to user
     private void displayMainMenu() {
         System.out.println("\nSelect from:");
@@ -110,8 +113,9 @@ public class PokemonApp {
                 break;
         }
     }
-    //Main Menu---------------------------------------------------------------------------------------------------------
+    //Main Menu --------------------------------------------------------------------------------------------------------
 
+    //Main Menu - Trainer ----------------------------------------------------------------------------------------------
     // MODIFIES: this
     // EFFECTS: allows user to change trainers name, and gender
     private void modifyTrainer() {
@@ -169,8 +173,9 @@ public class PokemonApp {
         Trainer.Gender newGender = (in.equals("m")) ? m : (in.equals("f")) ? f : o;
         myTrainer.setGender(newGender);
     }
-    //Main Menu - Trainer-----------------------------------------------------------------------------------------------
+    //Main Menu - Trainer ----------------------------------------------------------------------------------------------
 
+    //Main Menu - Ranch ------------------------------------------------------------------------------------------------
     // MODIFIES: this
     // EFFECTS: allows user to view, add, and delete Pokemon from the ranch and modify specific ones
     private void modifyRanch() {
@@ -259,6 +264,7 @@ public class PokemonApp {
     }
     //Main Menu - Ranch ------------------------------------------------------------------------------------------------
 
+    //Main Menu - Pokemon ----------------------------------------------------------------------------------------------
     // EFFECTS: allows user to pick the Pokemon they wish to modify
     private void pickPokemonToModify() {
         if (myTrainer.hasZeroPokemon()) {
@@ -347,9 +353,9 @@ public class PokemonApp {
         String shinyText = p.getShiny() ? "⭐shiny⭐" : "not shiny";
         System.out.println(p.getNickname() + " is now " + shinyText);
     }
+    //Main Menu - Pokemon ----------------------------------------------------------------------------------------------
 
-    //Main Menu - Pokemon-----------------------------------------------------------------------------------------------
-
+    //Main Menu - List of Teams ----------------------------------------------------------------------------------------
     // MODIFIES: this
     // EFFECTS: allows users to create, delete teams, and view their list of teams
     private void modifyListOfTeams() {
@@ -427,6 +433,7 @@ public class PokemonApp {
     }
     //Main Menu - List of Teams-----------------------------------------------------------------------------------------
 
+    //Main Menu - Team--------------------------------------------------------------------------------------------------
     // EFFECTS: allows user to pick the Pokemon they wish to modify
     private void pickTeamToModify() {
         if (myTrainer.hasZeroTeams()) {
@@ -518,8 +525,9 @@ public class PokemonApp {
             t.moveFront(toFront);
         }
     }
-    //Main Menu - Team-------------------------------------------------------------------------------------------
+    //Main Menu - Team -------------------------------------------------------------------------------------------------
 
+    //SAVE/LOAD --------------------------------------------------------------------------------------------------------
     // EFFECTS: saves the trainer to file
     private void saveTrainer() {
         try {
@@ -542,8 +550,9 @@ public class PokemonApp {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
-    // SAVE/LOAD -------------------------------------------------------------------------------------------------------
+    //SAVE/LOAD --------------------------------------------------------------------------------------------------------
 
+    //Helpers ----------------------------------------------------------------------------------------------------------
     // EFFECTS: asks user for a valid nickname, then returns the Pokemon with that nickname
     private Pokemon getUserPokemon() {
         System.out.println(myTrainer.displayRanch());

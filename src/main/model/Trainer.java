@@ -7,7 +7,7 @@ import persistence.Writable;
 import java.sql.Wrapper;
 import java.util.*;
 
-// Represents a trainer with a name, gender, list of caught Pokemon, and list of Teams
+// Represents a trainer with a name, gender, list of caught Pokemon, and list of Teams full of Pokemon
 public class Trainer implements Writable {
     // Fields ----------------------------------------------------------------------------------------------------------
     private String name;
@@ -20,6 +20,7 @@ public class Trainer implements Writable {
     }
 
     // Constructors ----------------------------------------------------------------------------------------------------
+    // EFFECTS: constructs a trainer with given name and default gender
     public Trainer(String name) {
         this.name = name;
         gender = Gender.OTHER;
@@ -27,33 +28,40 @@ public class Trainer implements Writable {
         teams = new ArrayList<>();
     }
 
+    // constructs a trainer with given name and given gender
     public Trainer(String name, Gender gender) {
         this.name = name;
         this.gender = gender;
         ranch = new ArrayList<>();
         teams = new ArrayList<>();
     }
+    // Constructors ----------------------------------------------------------------------------------------------------
 
     // Getters and Setters ---------------------------------------------------------------------------------------------
+    // EFFECTS: produces the name of the trainer
     public String getName() {
         return name;
     }
 
+    // EFFECTS: produces the gender of the trainer
     public Gender getGender() {
         return gender;
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the name of the trainer to given name
     public void setName(String name) {
         this.name = name;
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the gender of the trainer to given gender
     public void setGender(Gender gender) {
         this.gender = gender;
     }
     // Getters and Setters ---------------------------------------------------------------------------------------------
 
     // Pokemon Methods -------------------------------------------------------------------------------------------------
-
     // EFFECTS: returns the number of Pokemon in the ranch
     public int numberPokemon() {
         return ranch.size();
@@ -247,6 +255,7 @@ public class Trainer implements Writable {
     // Team Methods ----------------------------------------------------------------------------------------------------
 
     // JSON Methods ----------------------------------------------------------------------------------------------------
+    // EFFECTS: produces the json representation of this trainer
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -279,6 +288,7 @@ public class Trainer implements Writable {
     // JSON Methods ----------------------------------------------------------------------------------------------------
 
     // Other Methods ---------------------------------------------------------------------------------------------------
+    // EFFECTS: produces simple string representation of the trainer
     @Override
     public String toString() {
         return name + " the Trainer!"
