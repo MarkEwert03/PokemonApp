@@ -11,30 +11,41 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-// represents the gui version of the Pokemon app
-public class PokemonAppGUI implements ActionListener {
+// represents the main frame for the gui version of the Pokemon app
+public class PokemonAppGUI extends JFrame implements ActionListener {
     // CONSTANTS
     private static final String JSON_STORE = "./data/trainer.json";
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 450;
+    public static final int WIDTH = 960;
+    public static final int HEIGHT = 540;
+
+    // Colours
+    private final Color paleRed = new Color(0xfad1d1);
+    private final Color paleOrange = new Color(0xfae6d1);
+    private final Color paleYellow = new Color(0xfafad1);
+    private final Color paleLime = new Color(0xe6fad1);
+    private final Color paleGreen = new Color(0xd1fad1);
+    private final Color paleMint = new Color(0xd1fae6);
+    private final Color paleCyan = new Color(0xd1fafa);
+    private final Color paleBlue = new Color(0xd1e6fa);
+    private final Color palePurple = new Color(0xd1d1fa);
+    private final Color paleViolet = new Color(0xe6d1fa);
+    private final Color palePink = new Color(0xfad1fa);
+    private final Color paleSalmon = new Color(0xfad1e6);
+    private final Color paleGrey = new Color(0xcccccc);
 
     // Miscellaneous
     private Trainer myTrainer;
-    int count = 0;
 
-    // Main Menu things
-    private JFrame mainFrame = new JFrame();
-    JPanel mainMenuPanel = new JPanel();
-    private JButton trainerButton = new JButton("Modify Trainer Information");
-    private JButton ranchButton = new JButton("Modify Ranch of Pokemon");
-    private JButton pokemonButton = new JButton("Modify a Specific Pokemon");
-    private JButton listOfTeamsButton = new JButton("Modify List of Teams");
-    private JButton teamButton = new JButton("Modify a Specific Team");
-    private JButton saveInfoPAnel = new JButton("Save Information");
-    private JButton loadInfoButton = new JButton("Load Information");
+    // Main tabbed main things
+    private JTabbedPane mainTabbedPane = new JTabbedPane();
+    private JPanel mainMenuPanel = new JPanel();
+    private JPanel trainerPanel = new JPanel();
+    private JPanel ranchPanel = new JPanel();
+    private JPanel pokemonPanel = new JPanel();
+    private JPanel listOfTeamsPanel = new JPanel();
+    private JPanel teamPanel = new JPanel();
 
     // JPanels
-    private JPanel testingPanel = new JPanel();
     private JPanel imagePanel = new JPanel();
 
     // JSON
@@ -42,8 +53,9 @@ public class PokemonAppGUI implements ActionListener {
     private JsonReader jsonReader;
 
     // MODIFIES: this
-    // EFFECTS: default constructor that runs the GUI program
+    // EFFECTS: default constructor that runs the GUI program and makes main frame
     public PokemonAppGUI() throws FileNotFoundException {
+        super();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         mainMenuFrame();
@@ -55,30 +67,28 @@ public class PokemonAppGUI implements ActionListener {
     private void mainMenuFrame() {
         createImage();
 
-        mainFrame.setTitle("Pokemon GUI App");
-        mainFrame.setSize(960, 540);
-        mainFrame.setLayout(new FlowLayout());
-        mainFrame.setVisible(true);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Pokemon GUI App");
+        this.setSize(WIDTH, HEIGHT);
+        this.setLayout(new GridLayout());
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.add(mainTabbedPane);
 
-        mainMenuPanel.setBounds(480, 270, 50, 50);
-        setupNewButton(trainerButton, "trainer", new Color(0xfad1d1));
-        setupNewButton(ranchButton, "ranch", new Color(0xfafad1));
-        setupNewButton(pokemonButton, "pokemon", new Color(0xd1fad1));
-        setupNewButton(listOfTeamsButton, "list of teams", new Color(0xd1fafa));
-        setupNewButton(teamButton, "team", new Color(0xd1d1fa));
+        setupTab("Main Menu", mainMenuPanel, paleGrey);
+        setupTab("Modify Trainer Information", trainerPanel, paleRed);
+        setupTab("Modify Ranch of Pokemon", ranchPanel, paleYellow);
+        setupTab("Modify a Specific Pokemon", pokemonPanel, paleGreen);
+        setupTab("Modify List of Teams", listOfTeamsPanel, paleCyan);
+        setupTab("Modify a Specific Team", teamPanel, palePurple);
 
-        mainFrame.add(mainMenuPanel);
-        mainFrame.add(imagePanel);
+        mainMenuPanel.add(imagePanel);
     }
 
-    // EFFECTS: helper that initializes given button with given action command, color, and default behaviour
-    private void setupNewButton(JButton button, String command, Color c) {
-        button.setActionCommand(command);
-        button.addActionListener(this);
-        button.setVisible(true);
-        button.setBackground(c);
-        mainMenuPanel.add(button);
+    // EFFECTS: helper that adds panel to mainTabbedPane and picks tab and panel colour for given c
+    private void setupTab(String text, JPanel panel, Color c) {
+        mainTabbedPane.add(text, panel);
+        mainTabbedPane.setBackgroundAt(mainTabbedPane.indexOfTab(text), c);
+        panel.setBackground(c);
     }
 
     // EFFECTS: creates a new image of mew from file
