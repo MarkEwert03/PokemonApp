@@ -113,8 +113,21 @@ public class PokemonAppGUI implements ActionListener {
     }
     //SAVE/LOAD --------------------------------------------------------------------------------------------------------
 
+    // MODIFIES: this
+    // EFFECTS:
     @Override
     public void actionPerformed(ActionEvent e) {
-        //
+        switch (e.getActionCommand()) {
+            case "trainer":
+                break;
+            case "ranch":
+                break;
+            case "pokemon":
+                break;
+            case "list of teams":
+                break;
+            case "team":
+                break;
+        }
     }
 }
