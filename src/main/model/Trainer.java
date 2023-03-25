@@ -288,7 +288,7 @@ public class Trainer implements Writable {
     // JSON Methods ----------------------------------------------------------------------------------------------------
 
     // Other Methods ---------------------------------------------------------------------------------------------------
-    // EFFECTS: produces simple string representation of the trainer
+    // EFFECTS: produces string representation of the trainer with name, gender, number of Pokemon, and number of Teams
     @Override
     public String toString() {
         return name + " the Trainer!"

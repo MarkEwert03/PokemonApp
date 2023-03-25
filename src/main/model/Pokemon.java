@@ -155,7 +155,7 @@ public class Pokemon implements Writable {
         return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
 
-    // EFFECTS: produces simple string representation of the Pokemon
+    // EFFECTS: produces the nickname and species of the Pokemon as a String
     @Override
     public String toString() {
         return nickname + " the " + capitalize(species.toString());

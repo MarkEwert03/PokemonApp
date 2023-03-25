@@ -153,7 +153,7 @@ public class Team implements Writable {
     // JSON Methods ----------------------------------------------------------------------------------------------------
 
     // Other Methods ---------------------------------------------------------------------------------------------------
-    // produces simple text representation of team
+    // EFFECTS: produces text representation of team with name and length
     @Override
     public String toString() {
         return name + " (" + length() + " Pokemon)";
