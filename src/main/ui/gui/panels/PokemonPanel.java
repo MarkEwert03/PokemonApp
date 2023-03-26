@@ -16,4 +16,10 @@ public class PokemonPanel extends ColorPanel {
     protected void initialize() {
 
     }
+
+    // EFFECTS: updates text label for specific pokemon information
+    @Override
+    public void updateLabels() {
+
+    }
 }

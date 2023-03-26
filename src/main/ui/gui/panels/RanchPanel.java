@@ -16,4 +16,10 @@ public class RanchPanel extends ColorPanel {
     protected void initialize() {
 
     }
+
+    // EFFECTS: updates text label for ranch information
+    @Override
+    public void updateLabels() {
+
+    }
 }

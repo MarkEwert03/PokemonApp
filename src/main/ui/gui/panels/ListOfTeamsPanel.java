@@ -16,4 +16,10 @@ public class ListOfTeamsPanel extends ColorPanel {
     protected void initialize() {
 
     }
+
+    // EFFECTS: updates text label for list of teams information
+    @Override
+    public void updateLabels() {
+
+    }
 }

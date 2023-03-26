@@ -8,7 +8,6 @@ import ui.gui.panels.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 // represents the main frame for the gui version of the Pokemon app
 public class PokemonAppGUI extends JFrame {
@@ -16,6 +15,8 @@ public class PokemonAppGUI extends JFrame {
     private static final String JSON_STORE = "./data/trainer.json";
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 750;
+
+    private static Trainer myTrainer;
 
     // Colours
     private final Color paleRed = new Color(0xfad1d1);
@@ -33,13 +34,13 @@ public class PokemonAppGUI extends JFrame {
     private final Color paleGrey = new Color(0xcccccc);
 
     // Main tabbed main things
-    private final JTabbedPane mainTabbedPane = new JTabbedPane();
-    private final ColorPanel mainMenuPanel = new MainMenuPanel(paleGrey);
-    private final ColorPanel trainerPanel = new TrainerPanel(paleRed);
-    private final ColorPanel ranchPanel = new RanchPanel(paleYellow);
-    private final ColorPanel pokemonPanel = new PokemonPanel(paleGreen);
-    private final ColorPanel listOfTeamsPanel = new ListOfTeamsPanel(paleCyan);
-    private final ColorPanel teamPanel = new TeamPanel(palePurple);
+    private JTabbedPane mainTabbedPane = new JTabbedPane();
+    private ColorPanel mainMenuPanel;
+    private ColorPanel trainerPanel;
+    private ColorPanel ranchPanel;
+    private ColorPanel pokemonPanel;
+    private ColorPanel listOfTeamsPanel;
+    private ColorPanel teamPanel;
 
     // JSON
     private final JsonWriter jsonWriter;
@@ -51,13 +52,26 @@ public class PokemonAppGUI extends JFrame {
         super();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-        mainMenuFrame();
+        myTrainer = new Trainer("Trainer");
+        setupFrame();
+    }
+
+    // EFFECTS: returns my trainer
+    public static Trainer getMyTrainer() {
+        return myTrainer;
     }
 
     // MODIFIES: this
     // EFFECTS: creates the main menu frame that displays options to modify trainer information, ranch, specific
     //          Pokemon, list of teams, specific teams, save & load data, and quit
-    private void mainMenuFrame() {
+    private void setupFrame() {
+        mainMenuPanel = new MainMenuPanel(paleGrey);
+        trainerPanel = new TrainerPanel(paleRed);
+        ranchPanel = new RanchPanel(paleYellow);
+        pokemonPanel = new PokemonPanel(paleGreen);
+        listOfTeamsPanel = new ListOfTeamsPanel(paleCyan);
+        teamPanel = new TeamPanel(palePurple);
+
         this.setTitle("Pokemon GUI App");
         this.setSize(WIDTH, HEIGHT);
         this.setLayout(new GridLayout());
@@ -71,6 +85,12 @@ public class PokemonAppGUI extends JFrame {
         setupTab("Modify a Specific Pokemon", pokemonPanel);
         setupTab("Modify List of Teams", listOfTeamsPanel);
         setupTab("Modify a Specific Team", teamPanel);
+
+        this.mainTabbedPane.addChangeListener(e -> {
+            System.out.println("Selected Panel " + mainTabbedPane.getSelectedIndex());
+            Component currentComp = mainTabbedPane.getSelectedComponent();
+            ((ColorPanel) currentComp).updateLabels();
+        });
     }
 
     // EFFECTS: helper that adds panel to mainTabbedPane and picks tab and panel colour for given c
