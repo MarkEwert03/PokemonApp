@@ -44,7 +44,7 @@ public class TrainerPanel extends ColorPanel {
 
     }
 
-    // EFFECTS:
+    // EFFECTS: handles confirm button presses to the change trainer name button
     private void handleConfirmTrainerName() {
         String text = nameTextField.getText();
         if (!text.isBlank()) {
