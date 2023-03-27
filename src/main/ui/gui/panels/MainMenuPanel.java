@@ -10,7 +10,6 @@ public class MainMenuPanel extends ColorPanel {
     private JPanel mewPanel;
     private JButton saveButton;
     private JButton loadButton;
-    private JLabel trainerLabel;
 
     // EFFECTS: constructs a new main menu panel with given colour
     public MainMenuPanel(Color color) {
@@ -36,14 +35,11 @@ public class MainMenuPanel extends ColorPanel {
         mewPanel.add(new JLabel(mewIcon));
         mewPanel.setVisible(true);
         this.add(mewPanel);
-
-        trainerLabel = new JLabel(newLineStringToMultilineLabel(myTrainer.toString()));
-        this.add(trainerLabel);
     }
 
-    // EFFECTS: updates text label for trainer information
+    // EFFECTS: nothing
     @Override
     public void updateLabels() {
-        trainerLabel.setText(newLineStringToMultilineLabel(myTrainer.toString()));
+        // nothing needs to update on main menu
     }
 }

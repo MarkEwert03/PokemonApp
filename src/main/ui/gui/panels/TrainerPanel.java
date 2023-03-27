@@ -8,9 +8,11 @@ import java.awt.event.FocusListener;
 // represents a JPanel for users to modify their trainer information and see a sprite of themselves
 public class TrainerPanel extends ColorPanel {
     private JPanel trainerSpritePanel;
+
     private JLabel nameLabel;
     private JTextField nameTextField;
     private JButton confirmButton;
+
     private JLabel trainerInfoLabel;
 
     // EFFECTS: constructs a new trainer panel with given colour
@@ -34,10 +36,10 @@ public class TrainerPanel extends ColorPanel {
         this.add(nameTextField);
 
         confirmButton = new JButton("Confirm Changes");
+        this.add(confirmButton);
         confirmButton.addActionListener(e -> {
             handleConfirmTrainerName();
         });
-        this.add(confirmButton);
 
         trainerInfoLabel = new JLabel(newLineStringToMultilineLabel(myTrainer.toString()));
         this.add(trainerInfoLabel);
@@ -46,9 +48,9 @@ public class TrainerPanel extends ColorPanel {
 
     // EFFECTS: handles confirm button presses to the change trainer name button
     private void handleConfirmTrainerName() {
-        String text = nameTextField.getText();
-        if (!text.isBlank()) {
-            myTrainer.setName(text);
+        String userTrainerName = nameTextField.getText();
+        if (!userTrainerName.isBlank()) {
+            myTrainer.setName(userTrainerName);
             updateLabels();
         } else {
             JOptionPane.showMessageDialog(null, "Invalid Trainer Name",

@@ -87,7 +87,6 @@ public class PokemonAppGUI extends JFrame {
         setupTab("Modify a Specific Team", teamPanel);
 
         this.mainTabbedPane.addChangeListener(e -> {
-            System.out.println("Selected Panel " + mainTabbedPane.getSelectedIndex());
             Component currentComp = mainTabbedPane.getSelectedComponent();
             ((ColorPanel) currentComp).updateLabels();
         });

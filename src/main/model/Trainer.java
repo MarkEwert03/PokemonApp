@@ -48,6 +48,16 @@ public class Trainer implements Writable {
         return gender;
     }
 
+    // EFFECTS: produces all the Pokemon in trainer's ranch
+    public List<Pokemon> getRanch() {
+        return ranch;
+    }
+
+    // EFFECTS: produces all the Trainer's teams
+    public List<Team> getTeams() {
+        return teams;
+    }
+
     // MODIFIES: this
     // EFFECTS: changes the name of the trainer to given name
     public void setName(String name) {
