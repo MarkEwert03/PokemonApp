@@ -2,18 +2,23 @@ package ui.gui.panels;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 // represents a JPanel for users to modify their trainer information and see a sprite of themselves
 public class TrainerPanel extends ColorPanel {
-    private JPanel trainerSpritePanel;
+    private JPanel spritePanel;
 
+    private JPanel infoPanel;
+
+    private JPanel namePanel;
     private JLabel nameLabel;
     private JTextField nameTextField;
+
+    private JPanel genderPanel;
+    private JLabel genderLabel;
+
     private JButton confirmButton;
 
-    private JLabel trainerInfoLabel;
+    private JLabel descriptionLabel;
 
     // EFFECTS: constructs a new trainer panel with given colour
     public TrainerPanel(Color color) {
@@ -24,26 +29,48 @@ public class TrainerPanel extends ColorPanel {
     // EFFECTS: sets up JComponents needed for trainer panel
     @Override
     protected void initialize() {
-        trainerSpritePanel = new JPanel();
-        ImageIcon maleTrainer = new ImageIcon("./data/sprites/male trainer.png");
-        trainerSpritePanel.add(new JLabel(maleTrainer));
-        trainerSpritePanel.setVisible(true);
-        this.add(trainerSpritePanel);
+        this.setLayout(new GridLayout(1, 2));
 
+        spritePanel = new JPanel();
+        this.add(spritePanel);
+        spritePanel.setBackground(colour);
+        ImageIcon maleTrainer = new ImageIcon("./data/sprites/male trainer.png");
+        spritePanel.add(new JLabel(maleTrainer));
+        spritePanel.setVisible(true);
+
+        infoPanel = new JPanel();
+        this.add(infoPanel);
+        infoPanel.setLayout(new GridLayout(4, 1));
+        infoPanel.setBackground(colour);
+
+        setupInfoPanel();
+
+    }
+
+    // EFFECTS: creates name panel, gender panel, confirm button, and info text needed for trainer panel
+    private void setupInfoPanel() {
+        namePanel = new JPanel();
+        infoPanel.add(namePanel);
+        namePanel.setBackground(colour);
         nameLabel = new JLabel("Trainer name:");
-        this.add(nameLabel);
+        namePanel.add(nameLabel);
         nameTextField = new JTextField(10);
-        this.add(nameTextField);
+        namePanel.add(nameTextField);
+
+        genderPanel = new JPanel();
+        infoPanel.add(genderPanel);
+        genderPanel.setBackground(colour);
+        genderLabel = new JLabel("Trainer Gender:");
+        genderPanel.add(genderLabel);
 
         confirmButton = new JButton("Confirm Changes");
-        this.add(confirmButton);
+        infoPanel.add(confirmButton);
         confirmButton.addActionListener(e -> {
             handleConfirmTrainerName();
         });
 
-        trainerInfoLabel = new JLabel(newLineStringToMultilineLabel(myTrainer.toString()));
-        this.add(trainerInfoLabel);
-
+        descriptionLabel = new JLabel(newLineStringToMultilineLabel(myTrainer.toString()));
+        infoPanel.add(descriptionLabel);
     }
 
     // EFFECTS: handles confirm button presses to the change trainer name button
@@ -61,6 +88,6 @@ public class TrainerPanel extends ColorPanel {
     // EFFECTS: updates text label for trainer information
     @Override
     public void updateLabels() {
-        trainerInfoLabel.setText(newLineStringToMultilineLabel(myTrainer.toString()));
+        descriptionLabel.setText(newLineStringToMultilineLabel(myTrainer.toString()));
     }
 }

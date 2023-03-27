@@ -69,7 +69,8 @@ public class PokemonPanel extends ColorPanel {
     // CREATES: text boxes to allow user to edit current Pokemon details
     private void modifyPokemonMenu() {
         if (currentPokemon != null) {
-            createModifyTools();
+            modifyPokemonPanel.setVisible(true);
+            createModifyingTools();
 
             confirmButton = new JButton("Confirm Changes");
             modifyPokemonPanel.add(confirmButton);
@@ -77,11 +78,13 @@ public class PokemonPanel extends ColorPanel {
             confirmButton.addActionListener(e -> {
                 handleConfirm();
             });
+        } else {
+            modifyPokemonPanel.setVisible(false);
         }
     }
 
     // EFFECT: creates tools need to change pokemon's nickname, gender, and shiny status
-    private void createModifyTools() {
+    private void createModifyingTools() {
         nicknamePanel = new JPanel();
         modifyPokemonPanel.add(nicknamePanel);
         nicknamePanel.setLayout(new FlowLayout());
