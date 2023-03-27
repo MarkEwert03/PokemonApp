@@ -22,12 +22,10 @@ public class MainMenuPanel extends ColorPanel {
     protected void initialize() {
         saveButton = new JButton("Save Information");
         saveButton.setVisible(true);
-        saveButton.setBackground(colour.darker());
         this.add(saveButton);
 
         loadButton = new JButton("Load Information");
         loadButton.setVisible(true);
-        loadButton.setBackground(colour.darker());
         this.add(loadButton);
 
         mewPanel = new JPanel();

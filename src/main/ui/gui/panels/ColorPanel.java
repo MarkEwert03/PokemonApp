@@ -36,4 +36,9 @@ public abstract class ColorPanel extends JPanel {
         String replaced = str.replace("\n", "<br>");
         return "<html>" + replaced + "</html>";
     }
+
+    // EFFECTS: helper for opening a new text window for users to input information
+    protected String textPrompt(String message) {
+        return JOptionPane.showInputDialog(this, message, null);
+    }
 }

@@ -25,17 +25,17 @@ public class RanchPanel extends ColorPanel {
         this.add(Box.createRigidArea(new Dimension(20, 20)));
 
         addPokemonButton = new JButton("Add Pokemon");
+        this.add(addPokemonButton);
         addPokemonButton.addActionListener(e -> {
             handleAddPokemon();
         });
-        this.add(addPokemonButton);
         this.add(Box.createRigidArea(new Dimension(0, 20)));
 
         deletePokemonButton = new JButton("Delete Pokemon");
+        this.add(deletePokemonButton);
         deletePokemonButton.addActionListener(e -> {
             handleDeletePokemon();
         });
-        this.add(deletePokemonButton);
         this.add(Box.createRigidArea(new Dimension(0, 20)));
 
         ranchInfoLabel = new JLabel();
@@ -70,7 +70,7 @@ public class RanchPanel extends ColorPanel {
     // EFFECTS: creates new window to let users delete a pokemon from ranch and all teams
     private void handleDeletePokemon() {
         if (myTrainer.hasZeroPokemon()) {
-            JOptionPane.showMessageDialog(null, "You have no Pokemon",
+            JOptionPane.showMessageDialog(null, "You haven't made any Pokemon yet!",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             String pokeNickname = textPrompt("Nickname of Pokemon");
@@ -87,11 +87,6 @@ public class RanchPanel extends ColorPanel {
             }
             updateLabels();
         }
-    }
-
-    // EFFECTS: helper for opening a new text window for users to input information
-    private String textPrompt(String message) {
-        return JOptionPane.showInputDialog(this, message, null);
     }
 
     // EFFECTS: updates text label for ranch information
