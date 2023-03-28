@@ -57,14 +57,7 @@ public class TrainerPanel extends ColorPanel {
 
     // EFFECTS: creates name panel, gender panel, confirm button, and info text needed for trainer panel
     private void setupInfoPanel() {
-        namePanel = new JPanel();
-        infoPanel.add(namePanel);
-        namePanel.setBackground(colour);
-        nameLabel = new JLabel("Trainer name:");
-        namePanel.add(nameLabel);
-        nameTextField = new JTextField(10);
-        namePanel.add(nameTextField);
-
+        setupNamePanel();
         setupGenderPanel();
 
         confirmButton = new JButton("Confirm Changes");
@@ -77,7 +70,19 @@ public class TrainerPanel extends ColorPanel {
         infoPanel.add(descriptionLabel);
     }
 
-    // EFFECTS: setups up gender label and radio buttons in button group
+    // EFFECTS: sets up the label and text field needed for users to change their trainer's name
+    private void setupNamePanel() {
+        namePanel = new JPanel();
+        infoPanel.add(namePanel);
+        namePanel.setBackground(colour);
+        nameLabel = new JLabel("Trainer name:");
+        namePanel.add(nameLabel);
+        nameTextField = new JTextField(10);
+        namePanel.add(nameTextField);
+        nameTextField.setText(myTrainer.getName());
+    }
+
+    // EFFECTS: sets up up gender label and radio buttons in button group
     private void setupGenderPanel() {
         genderPanel = new JPanel();
         infoPanel.add(genderPanel);

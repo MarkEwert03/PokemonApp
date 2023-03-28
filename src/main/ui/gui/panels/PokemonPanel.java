@@ -23,9 +23,16 @@ public class PokemonPanel extends ColorPanel {
 
     private JPanel genderPanel;
     private JLabel genderLabel;
+    private ButtonGroup genderButtonGroup;
+    private JRadioButton maleRadioButton;
+    private JRadioButton femaleRadioButton;
+    private JRadioButton unknownRadioButton;
 
     private JPanel shinyPanel;
     private JLabel shinyLabel;
+    private ButtonGroup shinyButtonGroup;
+    private JRadioButton yesShinyButton;
+    private JRadioButton noShinyButton;
 
     private JButton confirmButton;
 
@@ -69,6 +76,8 @@ public class PokemonPanel extends ColorPanel {
     // CREATES: text boxes to allow user to edit current Pokemon details
     private void setupModifyPokemonPanel() {
         if (currentPokemon != null) {
+            modifyPokemonPanel.setVisible(true);
+
             if (currentPokemonLabel == null) {
                 currentPokemonLabel = new JLabel(currentPokemon.oneLineSummary(1, 1));
             } else {
@@ -77,7 +86,6 @@ public class PokemonPanel extends ColorPanel {
             this.add(currentPokemonLabel);
             currentPokemonLabel.setVisible(true);
 
-            modifyPokemonPanel.setVisible(true);
             setupNicknamePanel();
             setupGenderPanel();
             setupShinyPanel();
@@ -96,13 +104,13 @@ public class PokemonPanel extends ColorPanel {
         }
     }
 
-    // EFFECT: creates tools need to change pokemon's nickname, gender, and shiny status
+    // EFFECT: creates tools need to change Pokemon's nickname, gender, and shiny status
     private void setupNicknamePanel() {
         nicknamePanel = new JPanel();
         modifyPokemonPanel.add(nicknamePanel);
         nicknamePanel.setLayout(new FlowLayout());
         nicknamePanel.setBackground(colour);
-        nicknameLabel = new JLabel("Change " + currentPokemon.getNickname() + "'s nickname: ");
+        nicknameLabel = new JLabel("Change " + currentPokemon.getNickname() + "'s nickname ");
         nicknamePanel.add(nicknameLabel);
         nicknameTextField = new JTextField(10);
         nicknamePanel.add(nicknameTextField);
@@ -113,44 +121,76 @@ public class PokemonPanel extends ColorPanel {
     private void setupGenderPanel() {
         genderPanel = new JPanel();
         modifyPokemonPanel.add(genderPanel);
-        genderPanel.setLayout(new FlowLayout());
         genderPanel.setBackground(colour);
-        genderLabel = new JLabel("Change " + currentPokemon.getNickname() + "'s gender: ");
+        genderLabel = new JLabel(currentPokemon.getNickname() + "'s gender ");
         genderPanel.add(genderLabel);
+
+        genderButtonGroup = new ButtonGroup();
+        maleRadioButton = new JRadioButton("Male");
+        genderButtonGroup.add(maleRadioButton);
+        genderPanel.add(maleRadioButton);
+        maleRadioButton.setSelected(true);
+
+        femaleRadioButton = new JRadioButton("Female");
+        genderButtonGroup.add(femaleRadioButton);
+        genderPanel.add(femaleRadioButton);
+
+        unknownRadioButton = new JRadioButton("Unknown");
+        genderPanel.add(unknownRadioButton);
+        genderButtonGroup.add(unknownRadioButton);
     }
 
     // EFFECTS: creates 2 radio buttons for users to pick Pokemon's shiny status
     private void setupShinyPanel() {
         shinyPanel = new JPanel();
         modifyPokemonPanel.add(shinyPanel);
-        shinyPanel.setLayout(new FlowLayout());
         shinyPanel.setBackground(colour);
-        shinyLabel = new JLabel("Change " + currentPokemon.getNickname() + "'s shiny status: ");
+        shinyLabel = new JLabel(currentPokemon.getNickname() + "'s shiny status ");
         shinyPanel.add(shinyLabel);
+
+        shinyButtonGroup = new ButtonGroup();
+        yesShinyButton = new JRadioButton("Shiny");
+        shinyButtonGroup.add(yesShinyButton);
+        shinyPanel.add(yesShinyButton);
+
+        noShinyButton = new JRadioButton("Not Shiny");
+        shinyButtonGroup.add(noShinyButton);
+        shinyPanel.add(noShinyButton);
+        noShinyButton.setSelected(true);
     }
 
     // MODIFIES: this
     // EFFECTS: changes the information of the Pokemon based on the users inputed fields
     private void handleConfirm() {
-        String userNickname = nicknameTextField.getText();
-        if (userNickname.isBlank()) {
+        if (nicknameTextField.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Invalid Nickname",
                     "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else if (!currentPokemon.getNickname().equals(userNickname)
-                && myTrainer.getAllPokemonNicknames().contains(userNickname)) {
+        } else if (!currentPokemon.getNickname().equals(nicknameTextField.getText())
+                && myTrainer.getAllPokemonNicknames().contains(nicknameTextField.getText())) {
             JOptionPane.showMessageDialog(null, "Duplicate Nickname",
                     "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-            currentPokemon.setNickname(userNickname);
-            nicknameLabel.setText("Change " + currentPokemon.getNickname() + "'s nickname: ");
-            genderLabel.setText("Change " + currentPokemon.getNickname() + "'s gender: ");
-            shinyLabel.setText("Change " + currentPokemon.getNickname() + "'s shiny status: ");
+
+            currentPokemon.setNickname(nicknameTextField.getText());
+            nicknameLabel.setText(currentPokemon.getNickname() + "'s nickname ");
+            genderLabel.setText(currentPokemon.getNickname() + "'s gender ");
+            shinyLabel.setText(currentPokemon.getNickname() + "'s shiny status ");
+
+            if (maleRadioButton.isSelected()) {
+                currentPokemon.setGender(Pokemon.Gender.MALE);
+            } else if (femaleRadioButton.isSelected()) {
+                currentPokemon.setGender(Pokemon.Gender.FEMALE);
+            } else {
+                currentPokemon.setGender(Pokemon.Gender.UNKNOWN);
+            }
+
+            currentPokemon.setShiny(yesShinyButton.isSelected());
             currentPokemonLabel.setText(currentPokemon.oneLineSummary(1, 1));
             pokemonSelectionBox.requestFocus();
         }
     }
 
-    // EFFECTS: updates text label for specific pokemon information
+    // EFFECTS: updates text label for specific Pokemon information
     @Override
     public void updateLabels() {
         pokemonSelectionBox.removeAllItems();
