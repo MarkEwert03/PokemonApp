@@ -7,11 +7,14 @@ import java.awt.*;
 
 // represents a JPanel for users to modify a specific Pokemon
 public class PokemonPanel extends ColorPanel {
+    //top row
     private JPanel pokemonSelectionPanel;
+
     private JLabel pokemonSelectionLabel;
     private JComboBox<Pokemon> pokemonSelectionBox;
     private Pokemon currentPokemon;
 
+    // middle row
     private JPanel modifyPokemonPanel;
 
     private JPanel nicknamePanel;
@@ -25,6 +28,9 @@ public class PokemonPanel extends ColorPanel {
     private JLabel shinyLabel;
 
     private JButton confirmButton;
+
+    // bottom row
+    private JLabel currentPokemonLabel;
 
     // EFFECTS: constructs a new pokemon panel with given colour
     public PokemonPanel(Color color) {
@@ -47,26 +53,34 @@ public class PokemonPanel extends ColorPanel {
         pokemonSelectionPanel.add(pokemonSelectionBox);
         pokemonSelectionBox.setPreferredSize(new Dimension(250, 30));
 
-        this.add(Box.createHorizontalBox());
-
-        pokemonSelectionBox.addActionListener(e -> {
-            currentPokemon = (Pokemon) pokemonSelectionBox.getSelectedItem();
-            modifyPokemonPanel.removeAll();
-            modifyPokemonMenu();
-        });
-
         modifyPokemonPanel = new JPanel();
         this.add(modifyPokemonPanel);
         modifyPokemonPanel.setLayout(new GridLayout(2, 2));
         modifyPokemonPanel.setBackground(colour);
+
+        pokemonSelectionBox.addActionListener(e -> {
+            currentPokemon = (Pokemon) pokemonSelectionBox.getSelectedItem();
+            modifyPokemonPanel.removeAll();
+            setupModifyPokemonPanel();
+        });
     }
 
     // MODIFIES: this
     // CREATES: text boxes to allow user to edit current Pokemon details
-    private void modifyPokemonMenu() {
+    private void setupModifyPokemonPanel() {
         if (currentPokemon != null) {
+            if (currentPokemonLabel == null) {
+                currentPokemonLabel = new JLabel(currentPokemon.oneLineSummary(1, 1));
+            } else {
+                currentPokemonLabel.setText(currentPokemon.oneLineSummary(1, 1));
+            }
+            this.add(currentPokemonLabel);
+            currentPokemonLabel.setVisible(true);
+
             modifyPokemonPanel.setVisible(true);
-            createModifyingTools();
+            setupNicknamePanel();
+            setupGenderPanel();
+            setupShinyPanel();
 
             confirmButton = new JButton("Confirm Changes");
             modifyPokemonPanel.add(confirmButton);
@@ -76,11 +90,14 @@ public class PokemonPanel extends ColorPanel {
             });
         } else {
             modifyPokemonPanel.setVisible(false);
+            if (currentPokemonLabel != null) {
+                currentPokemonLabel.setVisible(false);
+            }
         }
     }
 
     // EFFECT: creates tools need to change pokemon's nickname, gender, and shiny status
-    private void createModifyingTools() {
+    private void setupNicknamePanel() {
         nicknamePanel = new JPanel();
         modifyPokemonPanel.add(nicknamePanel);
         nicknamePanel.setLayout(new FlowLayout());
@@ -90,14 +107,20 @@ public class PokemonPanel extends ColorPanel {
         nicknameTextField = new JTextField(10);
         nicknamePanel.add(nicknameTextField);
         nicknameTextField.setText(currentPokemon.getNickname());
+    }
 
+    // EFFECTS: creates 3 radio buttons for users to pick Pokemon's gender
+    private void setupGenderPanel() {
         genderPanel = new JPanel();
         modifyPokemonPanel.add(genderPanel);
         genderPanel.setLayout(new FlowLayout());
         genderPanel.setBackground(colour);
         genderLabel = new JLabel("Change " + currentPokemon.getNickname() + "'s gender: ");
         genderPanel.add(genderLabel);
+    }
 
+    // EFFECTS: creates 2 radio buttons for users to pick Pokemon's shiny status
+    private void setupShinyPanel() {
         shinyPanel = new JPanel();
         modifyPokemonPanel.add(shinyPanel);
         shinyPanel.setLayout(new FlowLayout());
@@ -110,15 +133,20 @@ public class PokemonPanel extends ColorPanel {
     // EFFECTS: changes the information of the Pokemon based on the users inputed fields
     private void handleConfirm() {
         String userNickname = nicknameTextField.getText();
-        if (!userNickname.isBlank() && !myTrainer.getAllPokemonNicknames().contains(userNickname)) {
+        if (userNickname.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Invalid Nickname",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (!currentPokemon.getNickname().equals(userNickname)
+                && myTrainer.getAllPokemonNicknames().contains(userNickname)) {
+            JOptionPane.showMessageDialog(null, "Duplicate Nickname",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
             currentPokemon.setNickname(userNickname);
             nicknameLabel.setText("Change " + currentPokemon.getNickname() + "'s nickname: ");
             genderLabel.setText("Change " + currentPokemon.getNickname() + "'s gender: ");
             shinyLabel.setText("Change " + currentPokemon.getNickname() + "'s shiny status: ");
+            currentPokemonLabel.setText(currentPokemon.oneLineSummary(1, 1));
             pokemonSelectionBox.requestFocus();
-        } else {
-            JOptionPane.showMessageDialog(null, "Duplicate Nickname",
-                    "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 

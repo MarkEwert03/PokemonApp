@@ -16,9 +16,6 @@ public class TeamPanel extends ColorPanel {
     private Team currentTeam;
 
     // middle row
-    private JLabel currentTeamLabel;
-
-    // bottom row
     private JPanel modifyTeamPanel;
 
     private JPanel namePanel;
@@ -33,6 +30,9 @@ public class TeamPanel extends ColorPanel {
     private JLabel moveFrontLabel;
 
     private JButton confirmButton;
+
+    // bottom row
+    private JLabel currentTeamLabel;
 
     // EFFECTS: constructs a new team panel with given colour
     public TeamPanel(Color color) {
@@ -144,8 +144,11 @@ public class TeamPanel extends ColorPanel {
     private void handleConfirm() {
         String userTeamName = nameTextField.getText();
         Pokemon pokemonToAdd = (Pokemon) addPokemonBox.getSelectedItem();
-        if (userTeamName.isBlank() || (!currentTeam.getName().equals(userTeamName)
-                && myTrainer.getAllTeamNames().contains(userTeamName))) {
+
+        if (userTeamName.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Invlaid Team Name",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else if (!currentTeam.getName().equals(userTeamName) && myTrainer.getAllTeamNames().contains(userTeamName)) {
             JOptionPane.showMessageDialog(null, "Duplicate Team Name",
                     "ERROR", JOptionPane.ERROR_MESSAGE);
         } else if (currentTeam.containsPokemon(pokemonToAdd)) {
