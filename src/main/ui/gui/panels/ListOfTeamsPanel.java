@@ -70,8 +70,10 @@ public class ListOfTeamsPanel extends ColorPanel {
             if (teamName == null) {
                 return;
             }
-            String confirmation = textPrompt("Are you sure? This action cannot be undone! Type yes to confirm");
-            if (confirmation.equalsIgnoreCase("yes")) {
+            int confirmation = JOptionPane.showConfirmDialog(this,
+                    "Are you sure? This action cannot be undone...",
+                    "Confirmation Window", JOptionPane.YES_NO_OPTION);
+            if (confirmation == JOptionPane.YES_OPTION) {
                 myTrainer.deleteTeam(teamName);
             }
             updateLabels();

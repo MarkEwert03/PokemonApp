@@ -7,11 +7,10 @@ import java.awt.*;
 
 // represents a JPanel for users to modify a specific Pokemon
 public class PokemonPanel extends ColorPanel {
-    private Pokemon currentPokemon;
-
     private JPanel pokemonSelectionPanel;
     private JLabel pokemonSelectionLabel;
     private JComboBox<Pokemon> pokemonSelectionBox;
+    private Pokemon currentPokemon;
 
     private JPanel modifyPokemonPanel;
 
@@ -25,9 +24,7 @@ public class PokemonPanel extends ColorPanel {
     private JPanel shinyPanel;
     private JLabel shinyLabel;
 
-    private JLabel confirmPanel;
     private JButton confirmButton;
-
 
     // EFFECTS: constructs a new pokemon panel with given colour
     public PokemonPanel(Color color) {
@@ -48,14 +45,9 @@ public class PokemonPanel extends ColorPanel {
         pokemonSelectionPanel.add(pokemonSelectionLabel);
         pokemonSelectionBox = new JComboBox<>();
         pokemonSelectionPanel.add(pokemonSelectionBox);
-        pokemonSelectionBox.setPreferredSize(new Dimension(150, 30));
+        pokemonSelectionBox.setPreferredSize(new Dimension(250, 30));
 
         this.add(Box.createHorizontalBox());
-
-        modifyPokemonPanel = new JPanel();
-        this.add(modifyPokemonPanel);
-        modifyPokemonPanel.setLayout(new GridLayout(2, 2));
-        modifyPokemonPanel.setBackground(colour);
 
         pokemonSelectionBox.addActionListener(e -> {
             currentPokemon = (Pokemon) pokemonSelectionBox.getSelectedItem();
@@ -63,6 +55,10 @@ public class PokemonPanel extends ColorPanel {
             modifyPokemonMenu();
         });
 
+        modifyPokemonPanel = new JPanel();
+        this.add(modifyPokemonPanel);
+        modifyPokemonPanel.setLayout(new GridLayout(2, 2));
+        modifyPokemonPanel.setBackground(colour);
     }
 
     // MODIFIES: this
@@ -118,6 +114,7 @@ public class PokemonPanel extends ColorPanel {
             nicknameLabel.setText("Change " + currentPokemon.getNickname() + "'s nickname: ");
             genderLabel.setText("Change " + currentPokemon.getNickname() + "'s gender: ");
             shinyLabel.setText("Change " + currentPokemon.getNickname() + "'s shiny status: ");
+            pokemonSelectionBox.requestFocus();
         } else {
             JOptionPane.showMessageDialog(null, "Duplicate Nickname",
                     "ERROR", JOptionPane.ERROR_MESSAGE);

@@ -89,7 +89,6 @@ public class TrainerPanel extends ColorPanel {
         maleRadioButton = new JRadioButton("Male");
         genderButtonGroup.add(maleRadioButton);
         genderPanel.add(maleRadioButton);
-        maleRadioButton.setSelected(true);
 
         femaleRadioButton = new JRadioButton("Female");
         genderButtonGroup.add(femaleRadioButton);
@@ -98,6 +97,7 @@ public class TrainerPanel extends ColorPanel {
         otherRadioButton = new JRadioButton("Other");
         genderPanel.add(otherRadioButton);
         genderButtonGroup.add(otherRadioButton);
+        otherRadioButton.setSelected(true);
     }
 
     // EFFECTS: handles confirm button presses to the change trainer name button
