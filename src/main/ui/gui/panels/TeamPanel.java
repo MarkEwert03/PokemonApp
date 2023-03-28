@@ -8,11 +8,17 @@ import java.awt.*;
 
 // represents a JPanel for users to modify a specific team
 public class TeamPanel extends ColorPanel {
+    // top row
     private JPanel teamSelectionPanel;
+
     private JLabel teamSelectionLabel;
     private JComboBox<Team> teamSelectionBox;
     private Team currentTeam;
 
+    // middle row
+    private JLabel currentTeamLabel;
+
+    // bottom row
     private JPanel modifyTeamPanel;
 
     private JPanel namePanel;
@@ -49,46 +55,51 @@ public class TeamPanel extends ColorPanel {
         teamSelectionPanel.add(teamSelectionBox);
         teamSelectionBox.setPreferredSize(new Dimension(250, 30));
 
-        this.add(Box.createHorizontalBox());
-
-        teamSelectionBox.addActionListener(e -> {
-            currentTeam = (Team) teamSelectionBox.getSelectedItem();
-            modifyTeamPanel.removeAll();
-            modifyTeamMenu();
-        });
-
         modifyTeamPanel = new JPanel();
         this.add(modifyTeamPanel);
         modifyTeamPanel.setLayout(new GridLayout(2, 2));
         modifyTeamPanel.setBackground(colour);
+
+        teamSelectionBox.addActionListener(e -> {
+            currentTeam = (Team) teamSelectionBox.getSelectedItem();
+            modifyTeamPanel.removeAll();
+            setupModifyTeamPanel();
+        });
     }
 
     // MODIFIES: this
     // CREATES: text boxes to allow user to edit current team details
-    private void modifyTeamMenu() {
+    private void setupModifyTeamPanel() {
         if (currentTeam != null) {
-            modifyTeamPanel.setVisible(true);
-            createModifyingTools();
-
-            addPokemonBox.removeAllItems();
-            addPokemonBox.addItem(null);
-            for (Pokemon p : myTrainer.getRanch()) {
-                addPokemonBox.addItem(p);
+            if (currentTeamLabel == null) {
+                currentTeamLabel = new JLabel(currentTeam.oneLineSummary());
+            } else {
+                currentTeamLabel.setText(currentTeam.oneLineSummary());
             }
+            this.add(currentTeamLabel);
+            currentTeamLabel.setVisible(true);
+
+            modifyTeamPanel.setVisible(true);
+            setupNamePanel();
+            setupAddPokemonPanel();
+            setupMoveFrontPanel();
 
             confirmButton = new JButton("Confirm Changes");
             modifyTeamPanel.add(confirmButton);
-
             confirmButton.addActionListener(e -> {
                 handleConfirm();
             });
+
         } else {
             modifyTeamPanel.setVisible(false);
+            if (currentTeamLabel != null) {
+                currentTeamLabel.setVisible(false);
+            }
         }
     }
 
     // EFFECT: creates tools need to change team's name, Pokemon team members, and position of members
-    private void createModifyingTools() {
+    private void setupNamePanel() {
         namePanel = new JPanel();
         modifyTeamPanel.add(namePanel);
         namePanel.setLayout(new FlowLayout());
@@ -97,7 +108,11 @@ public class TeamPanel extends ColorPanel {
         namePanel.add(nameLabel);
         nameTextField = new JTextField(10);
         namePanel.add(nameTextField);
+        nameTextField.setText(currentTeam.getName());
+    }
 
+    // EFFECTS: creates label and combo box for users to pick pokemon to add to team
+    private void setupAddPokemonPanel() {
         addPokemonPanel = new JPanel();
         modifyTeamPanel.add(addPokemonPanel);
         addPokemonPanel.setLayout(new FlowLayout());
@@ -107,7 +122,15 @@ public class TeamPanel extends ColorPanel {
         addPokemonBox = new JComboBox<>();
         addPokemonPanel.add(addPokemonBox);
         addPokemonBox.setPreferredSize(new Dimension(250, 30));
+        addPokemonBox.removeAllItems();
+        addPokemonBox.addItem(null);
+        for (Pokemon p : myTrainer.getRanch()) {
+            addPokemonBox.addItem(p);
+        }
+    }
 
+    // EFFECTS: creates buttons needed for user to pick which Pokemon should be moved to front
+    private void setupMoveFrontPanel() {
         moveFrontPanel = new JPanel();
         modifyTeamPanel.add(moveFrontPanel);
         moveFrontPanel.setLayout(new FlowLayout());
@@ -133,7 +156,7 @@ public class TeamPanel extends ColorPanel {
             nameLabel.setText("Change Team " + currentTeam.getName() + "'s name: ");
             if (pokemonToAdd != null) {
                 myTrainer.addPokemonToTeam(pokemonToAdd, currentTeam.getName());
-                System.out.println(currentTeam);
+                currentTeamLabel.setText(currentTeam.oneLineSummary());
                 teamSelectionBox.requestFocus();
             }
         }

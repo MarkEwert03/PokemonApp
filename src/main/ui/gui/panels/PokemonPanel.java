@@ -89,6 +89,7 @@ public class PokemonPanel extends ColorPanel {
         nicknamePanel.add(nicknameLabel);
         nicknameTextField = new JTextField(10);
         nicknamePanel.add(nicknameTextField);
+        nicknameTextField.setText(currentPokemon.getNickname());
 
         genderPanel = new JPanel();
         modifyPokemonPanel.add(genderPanel);
