@@ -11,7 +11,7 @@ public abstract class ColorPanel extends JPanel {
     protected Color colour;
     protected Trainer myTrainer;
 
-    // EFFECTS: constructs a new color panel with given color
+    // EFFECTS: constructs a new generic color panel with given color and trainer
     public ColorPanel(Color colour, Trainer globalTrainer) {
         super();
         this.colour = colour;

@@ -13,7 +13,7 @@ public class ListOfTeamsPanel extends ColorPanel {
     private JButton addTeamButton;
     private JButton deleteTeamButton;
 
-    // EFFECTS: constructs a new list of teams panel with given colour
+    // EFFECTS: constructs a new list of teams panel with given colour and trainer
     public ListOfTeamsPanel(Color color, Trainer globalTrainer) {
         super(color, globalTrainer);
     }

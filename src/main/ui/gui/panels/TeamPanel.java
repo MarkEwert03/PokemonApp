@@ -35,7 +35,7 @@ public class TeamPanel extends ColorPanel {
     // bottom row
     private JLabel currentTeamLabel;
 
-    // EFFECTS: constructs a new team panel with given colour
+    // EFFECTS: constructs a new team panel with given colour and trainer
     public TeamPanel(Color color, Trainer globalTrainer) {
         super(color, globalTrainer);
     }

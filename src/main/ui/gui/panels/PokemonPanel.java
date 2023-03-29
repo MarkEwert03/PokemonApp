@@ -40,7 +40,7 @@ public class PokemonPanel extends ColorPanel {
     // bottom row
     private JLabel currentPokemonLabel;
 
-    // EFFECTS: constructs a new pokemon panel with given colour
+    // EFFECTS: constructs a new pokemon panel with given colour and trainer
     public PokemonPanel(Color color, Trainer globalTrainer) {
         super(color, globalTrainer);
     }

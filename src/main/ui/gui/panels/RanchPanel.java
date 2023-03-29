@@ -13,7 +13,7 @@ public class RanchPanel extends ColorPanel {
     private JButton addPokemonButton;
     private JButton deletePokemonButton;
 
-    // EFFECTS: constructs a new ranch panel with given colour
+    // EFFECTS: constructs a new ranch panel with given colour and trainer
     public RanchPanel(Color color, Trainer globalTrainer) {
         super(color, globalTrainer);
     }

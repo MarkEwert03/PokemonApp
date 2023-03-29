@@ -23,7 +23,7 @@ public class MainMenuPanel extends ColorPanel {
     private JsonReader jsonReader;
     private static final String JSON_STORE = "./data/trainer.json";
 
-    // EFFECTS: constructs a new main menu panel with given colour
+    // EFFECTS: constructs a new main menu panel with given colour and trainer
     public MainMenuPanel(Color color, Trainer globalTrainer, PokemonAppGUI pag) {
         super(color, globalTrainer);
         window = pag;
@@ -74,7 +74,6 @@ public class MainMenuPanel extends ColorPanel {
             myTrainer = jsonReader.read();
             window.setGlobalTrainer(myTrainer);
             System.out.println("Loaded " + myTrainer.getName() + " from " + JSON_STORE);
-            System.out.println(myTrainer);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }

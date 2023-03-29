@@ -101,7 +101,6 @@ public class TrainerPanel extends ColorPanel {
         otherRadioButton = new JRadioButton("Other");
         genderPanel.add(otherRadioButton);
         genderButtonGroup.add(otherRadioButton);
-        otherRadioButton.setSelected(true);
     }
 
     // EFFECTS: handles confirm button presses to the change trainer name button
@@ -126,13 +125,17 @@ public class TrainerPanel extends ColorPanel {
     // EFFECTS: updates text label for trainer information
     @Override
     public void updateLabels() {
+        nameTextField.setText(myTrainer.getName());
         descriptionLabel.setText(newLineStringToMultilineLabel(myTrainer.toString()));
         if (myTrainer.getGender().equals(Trainer.Gender.MALE)) {
             spriteImageLabel.setIcon(new ImageIcon("./data/sprites/male trainer.png"));
+            maleRadioButton.setSelected(true);
         } else if (myTrainer.getGender().equals(Trainer.Gender.FEMALE)) {
             spriteImageLabel.setIcon(new ImageIcon("./data/sprites/female trainer.png"));
+            femaleRadioButton.setSelected(true);
         } else {
             spriteImageLabel.setIcon(new ImageIcon("./data/sprites/other trainer.png"));
+            otherRadioButton.setSelected(true);
         }
     }
 }
