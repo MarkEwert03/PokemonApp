@@ -2,6 +2,7 @@ package ui.gui.panels;
 
 import model.Pokemon;
 import model.Species;
+import model.Trainer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,8 +14,8 @@ public class ListOfTeamsPanel extends ColorPanel {
     private JButton deleteTeamButton;
 
     // EFFECTS: constructs a new list of teams panel with given colour
-    public ListOfTeamsPanel(Color color) {
-        super(color);
+    public ListOfTeamsPanel(Color color, Trainer globalTrainer) {
+        super(color, globalTrainer);
     }
 
     // MODIFIES: this

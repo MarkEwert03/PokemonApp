@@ -1,6 +1,7 @@
 package ui.gui.panels;
 
 import model.Pokemon;
+import model.Trainer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,8 +41,8 @@ public class PokemonPanel extends ColorPanel {
     private JLabel currentPokemonLabel;
 
     // EFFECTS: constructs a new pokemon panel with given colour
-    public PokemonPanel(Color color) {
-        super(color);
+    public PokemonPanel(Color color, Trainer globalTrainer) {
+        super(color, globalTrainer);
     }
 
     // MODIFIES: this

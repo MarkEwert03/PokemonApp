@@ -2,6 +2,7 @@ package ui.gui.panels;
 
 import model.Pokemon;
 import model.Species;
+import model.Trainer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,8 +14,8 @@ public class RanchPanel extends ColorPanel {
     private JButton deletePokemonButton;
 
     // EFFECTS: constructs a new ranch panel with given colour
-    public RanchPanel(Color color) {
-        super(color);
+    public RanchPanel(Color color, Trainer globalTrainer) {
+        super(color, globalTrainer);
     }
 
     // MODIFIES: this

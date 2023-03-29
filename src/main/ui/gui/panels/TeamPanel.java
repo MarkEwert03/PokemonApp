@@ -2,6 +2,7 @@ package ui.gui.panels;
 
 import model.Pokemon;
 import model.Team;
+import model.Trainer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,8 +36,8 @@ public class TeamPanel extends ColorPanel {
     private JLabel currentTeamLabel;
 
     // EFFECTS: constructs a new team panel with given colour
-    public TeamPanel(Color color) {
-        super(color);
+    public TeamPanel(Color color, Trainer globalTrainer) {
+        super(color, globalTrainer);
     }
 
     // MODIFIES: this

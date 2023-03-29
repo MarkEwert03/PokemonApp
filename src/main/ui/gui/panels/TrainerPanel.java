@@ -28,8 +28,8 @@ public class TrainerPanel extends ColorPanel {
     private JLabel descriptionLabel;
 
     // EFFECTS: constructs a new trainer panel with given colour
-    public TrainerPanel(Color color) {
-        super(color);
+    public TrainerPanel(Color color, Trainer globalTrainer) {
+        super(color, globalTrainer);
     }
 
     // MODIFIES: this
@@ -52,7 +52,6 @@ public class TrainerPanel extends ColorPanel {
         infoPanel.setBackground(colour);
 
         setupInfoPanel();
-
     }
 
     // EFFECTS: creates name panel, gender panel, confirm button, and info text needed for trainer panel

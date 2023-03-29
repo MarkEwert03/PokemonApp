@@ -12,16 +12,26 @@ public abstract class ColorPanel extends JPanel {
     protected Trainer myTrainer;
 
     // EFFECTS: constructs a new color panel with given color
-    public ColorPanel(Color colour) {
+    public ColorPanel(Color colour, Trainer globalTrainer) {
         super();
         this.colour = colour;
-        myTrainer = PokemonAppGUI.getMyTrainer();
+        myTrainer = globalTrainer;
         initialize();
     }
 
     // EFFECTS: returns the color of this panel
     public Color getColour() {
         return colour;
+    }
+
+    // EFFECTS: sets myTrainer to updated Trainer
+    public void setMyTrainer(Trainer updatedTrainer) {
+        myTrainer = updatedTrainer;
+    }
+
+    // EFFECTS: gets updated trainer (used after load)
+    public Trainer getMyTrainer() {
+        return myTrainer;
     }
 
     // MODIFIES: this
