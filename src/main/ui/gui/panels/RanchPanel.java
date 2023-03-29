@@ -48,7 +48,8 @@ public class RanchPanel extends ColorPanel {
     private void handleAddPokemon() {
         String pokeSpecies = textPrompt("Species of Pokemon");
         while (pokeSpecies != null && !Pokemon.isValidSpecies(pokeSpecies)) {
-            System.out.println("Invalid pokemon species, please try again");
+            JOptionPane.showMessageDialog(null, "Invalid Species",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
             pokeSpecies = textPrompt("Species of Pokemon");
         }
         if (pokeSpecies == null) {
@@ -56,7 +57,8 @@ public class RanchPanel extends ColorPanel {
         }
         String pokeNickname = textPrompt("Nickname of Pokemon");
         while (pokeNickname != null && myTrainer.getAllPokemonNicknames().contains(pokeNickname)) {
-            System.out.println("Duplicate nickname, please try again");
+            JOptionPane.showMessageDialog(null, "Duplicate Nickname",
+                    "ERROR", JOptionPane.ERROR_MESSAGE);
             pokeNickname = textPrompt("Nickname of Pokemon");
         }
         if (pokeNickname == null) {
@@ -76,7 +78,8 @@ public class RanchPanel extends ColorPanel {
         } else {
             String pokeNickname = textPrompt("Nickname of Pokemon");
             while (pokeNickname != null && !myTrainer.getAllPokemonNicknames().contains(pokeNickname)) {
-                System.out.println("Wrong nickname, please try again");
+                JOptionPane.showMessageDialog(null, "Incorrect Nickname",
+                        "ERROR", JOptionPane.ERROR_MESSAGE);
                 pokeNickname = textPrompt("Nickname of Pokemon");
             }
             if (pokeNickname == null) {

@@ -47,7 +47,8 @@ public class ListOfTeamsPanel extends ColorPanel {
     private void handleAddTeam() {
         String teamName = textPrompt("Name of team");
         while (teamName != null && myTrainer.getAllTeamNames().contains(teamName)) {
-            System.out.println("Duplicate team name, please try again");
+            JOptionPane.showMessageDialog(null, "Duplicate Team name",
+                    "Error", JOptionPane.ERROR_MESSAGE);
             teamName = textPrompt("Name of team");
         }
         if (teamName == null) {
@@ -65,7 +66,8 @@ public class ListOfTeamsPanel extends ColorPanel {
         } else {
             String teamName = textPrompt("Name of team");
             while (teamName != null && !myTrainer.getAllTeamNames().contains(teamName)) {
-                System.out.println("Wrong team name, please try again");
+                JOptionPane.showMessageDialog(null, "Incorrect Team Name",
+                        "Error", JOptionPane.ERROR_MESSAGE);
                 teamName = textPrompt("Name of team");
             }
             if (teamName == null) {
