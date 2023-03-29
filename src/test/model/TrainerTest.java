@@ -113,6 +113,25 @@ public class TrainerTest {
     }
 
     @Test
+    void testGetRanch() {
+        ArrayList<Pokemon> testAdvancedRanch = new ArrayList<>();
+        testAdvancedRanch.add(beedrill);
+        testAdvancedRanch.add(raticate);
+        testAdvancedRanch.add(spearow);
+        assertEquals(testAdvancedRanch, advancedTrainer.getRanch());
+    }
+
+    @Test
+    void testGetTeams() {
+        Team testingTeam = new Team("Intermediate Team");
+        testingTeam.addPokemon(kakuna);
+
+        Team gottenTeam = intermediateTrainer.getTeams().get(0);
+        assertEquals(testingTeam.getName(), gottenTeam.getName());
+        assertEquals(testingTeam.getPokemonIndex(kakuna), gottenTeam.getPokemonIndex(kakuna));
+    }
+
+    @Test
     void testNumberPokemon() {
         assertEquals(0, beginnerTrainer.numberPokemon());
         assertEquals(0, emptyTeamTrainer.numberPokemon());
