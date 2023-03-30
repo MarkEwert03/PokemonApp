@@ -132,7 +132,6 @@ public class PokemonPanel extends ColorPanel {
         maleRadioButton = new JRadioButton("Male");
         genderButtonGroup.add(maleRadioButton);
         genderPanel.add(maleRadioButton);
-        maleRadioButton.setSelected(true);
 
         femaleRadioButton = new JRadioButton("Female");
         genderButtonGroup.add(femaleRadioButton);
@@ -141,6 +140,14 @@ public class PokemonPanel extends ColorPanel {
         unknownRadioButton = new JRadioButton("Unknown");
         genderPanel.add(unknownRadioButton);
         genderButtonGroup.add(unknownRadioButton);
+
+        if (currentPokemon.getGender().equals(Pokemon.Gender.MALE)) {
+            maleRadioButton.setSelected(true);
+        } else if (currentPokemon.getGender().equals(Pokemon.Gender.FEMALE)) {
+            femaleRadioButton.setSelected(true);
+        } else {
+            unknownRadioButton.setSelected(true);
+        }
     }
 
     // MODIFIES: this
@@ -160,7 +167,12 @@ public class PokemonPanel extends ColorPanel {
         noShinyButton = new JRadioButton("Not Shiny");
         shinyButtonGroup.add(noShinyButton);
         shinyPanel.add(noShinyButton);
-        noShinyButton.setSelected(true);
+
+        if (currentPokemon.getShiny()) {
+            yesShinyButton.setSelected(true);
+        } else {
+            noShinyButton.setSelected(true);
+        }
     }
 
     // MODIFIES: this
@@ -174,7 +186,6 @@ public class PokemonPanel extends ColorPanel {
             JOptionPane.showMessageDialog(null, "Duplicate Nickname",
                     "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
-
             currentPokemon.setNickname(nicknameTextField.getText());
             nicknameLabel.setText(currentPokemon.getNickname() + "'s nickname ");
             genderLabel.setText(currentPokemon.getNickname() + "'s gender ");

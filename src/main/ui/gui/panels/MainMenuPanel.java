@@ -13,9 +13,18 @@ import java.io.IOException;
 
 // represents a JPanel for the main menu for users to save and load data
 public class MainMenuPanel extends ColorPanel {
-    private JPanel mewPanel;
+    // top row
+    private JPanel introPanel;
+    private JLabel introLabel;
+
+    // middle row
+    private JPanel statePanel;
     private JButton saveButton;
     private JButton loadButton;
+    private JLabel changedStateLabel;
+
+    // bottom row
+    private JPanel mewPanel;
 
     // JSON
     private PokemonAppGUI window;
@@ -35,25 +44,48 @@ public class MainMenuPanel extends ColorPanel {
     // EFFECTS: sets up JComponents needed for main menu panel
     @Override
     protected void initialize() {
+        this.setLayout(new GridLayout(3, 1));
+
+        introPanel = new JPanel();
+        this.add(introPanel);
+        introPanel.setBackground(colour);
+        introLabel = new JLabel("Pokemon Team Builder!");
+        introPanel.add(introLabel);
+        introLabel.setFont(new Font("Serif", Font.BOLD, 60));
+
+        statePanel = new JPanel();
+        this.add(statePanel);
+        setupStatePanel();
+
+        mewPanel = new JPanel();
+        this.add(mewPanel);
+        mewPanel.setBackground(colour);
+        ImageIcon mewIcon = new ImageIcon("./data/sprites/mew.png");
+        mewPanel.add(new JLabel(mewIcon));
+        mewPanel.setVisible(true);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates save and load buttons needed for persistance
+    private void setupStatePanel() {
+        statePanel.setBackground(colour);
+
         saveButton = new JButton("Save Information");
         saveButton.setVisible(true);
-        this.add(saveButton);
+        statePanel.add(saveButton);
         saveButton.addActionListener(e -> {
             saveInformation();
         });
 
         loadButton = new JButton("Load Information");
         loadButton.setVisible(true);
-        this.add(loadButton);
+        statePanel.add(loadButton);
         loadButton.addActionListener(e -> {
             loadInformation();
         });
 
-        mewPanel = new JPanel();
-        ImageIcon mewIcon = new ImageIcon("./data/sprites/mew.png");
-        mewPanel.add(new JLabel(mewIcon));
-        mewPanel.setVisible(true);
-        this.add(mewPanel);
+        changedStateLabel = new JLabel("");
+        statePanel.add(changedStateLabel);
     }
 
     // MODIFIES: this
@@ -63,7 +95,7 @@ public class MainMenuPanel extends ColorPanel {
             jsonWriter.open();
             jsonWriter.write(myTrainer);
             jsonWriter.close();
-            System.out.println("Saved " + myTrainer.getName() + " to " + JSON_STORE);
+            changedStateLabel.setText("Saved " + myTrainer.getName() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -75,7 +107,7 @@ public class MainMenuPanel extends ColorPanel {
         try {
             myTrainer = jsonReader.read();
             window.setGlobalTrainer(myTrainer);
-            System.out.println("Loaded " + myTrainer.getName() + " from " + JSON_STORE);
+            changedStateLabel.setText("Loaded " + myTrainer.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
