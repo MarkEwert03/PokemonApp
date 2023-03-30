@@ -6,6 +6,7 @@ import model.Trainer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 // represents a JPanel for users to modify their ranch of Pokemon
 public class RanchPanel extends ColorPanel {
@@ -46,15 +47,15 @@ public class RanchPanel extends ColorPanel {
     // MODIFIES: this
     // EFFECTS: creates new window to let users add a new Pokemon to ranch
     private void handleAddPokemon() {
-        String pokeSpecies = textPrompt("Species of Pokemon");
-        while (pokeSpecies != null && !Pokemon.isValidSpecies(pokeSpecies)) {
-            JOptionPane.showMessageDialog(null, "Invalid Species",
-                    "ERROR", JOptionPane.ERROR_MESSAGE);
-            pokeSpecies = textPrompt("Species of Pokemon");
-        }
+        // line below from https://stackoverflow.com/questions/13783295
+        String[] species = Arrays.stream((Species.class).getEnumConstants()).map(Enum::name).toArray(String[]::new);
+
+        String pokeSpecies = (String) JOptionPane.showInputDialog(null, "Species of Pokemon",
+                "Species Selector", JOptionPane.QUESTION_MESSAGE, null, species, null);
         if (pokeSpecies == null) {
             return;
         }
+
         String pokeNickname = textPrompt("Nickname of Pokemon");
         while (pokeNickname != null && myTrainer.getAllPokemonNicknames().contains(pokeNickname)) {
             JOptionPane.showMessageDialog(null, "Duplicate Nickname",
