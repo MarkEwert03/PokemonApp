@@ -40,13 +40,13 @@ public class PokemonPanel extends ColorPanel {
     // bottom row
     private JLabel currentPokemonLabel;
 
-    // EFFECTS: constructs a new pokemon panel with given colour and trainer
+    // EFFECTS: constructs a new Pokemon panel with given colour and trainer
     public PokemonPanel(Color color, Trainer globalTrainer) {
         super(color, globalTrainer);
     }
 
     // MODIFIES: this
-    // EFFECTS: sets up JComponents needed for pokemon panel
+    // EFFECTS: sets up JComponents needed for Pokemon panel
     @Override
     protected void initialize() {
         this.setLayout(new GridLayout(3, 1));
@@ -105,6 +105,7 @@ public class PokemonPanel extends ColorPanel {
         }
     }
 
+    // MODIFIES: this
     // EFFECT: creates tools need to change Pokemon's nickname, gender, and shiny status
     private void setupNicknamePanel() {
         nicknamePanel = new JPanel();
@@ -118,6 +119,7 @@ public class PokemonPanel extends ColorPanel {
         nicknameTextField.setText(currentPokemon.getNickname());
     }
 
+    // MODIFIES: this
     // EFFECTS: creates 3 radio buttons for users to pick Pokemon's gender
     private void setupGenderPanel() {
         genderPanel = new JPanel();
@@ -141,6 +143,7 @@ public class PokemonPanel extends ColorPanel {
         genderButtonGroup.add(unknownRadioButton);
     }
 
+    // MODIFIES: this
     // EFFECTS: creates 2 radio buttons for users to pick Pokemon's shiny status
     private void setupShinyPanel() {
         shinyPanel = new JPanel();

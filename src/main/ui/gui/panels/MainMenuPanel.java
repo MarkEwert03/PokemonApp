@@ -56,6 +56,7 @@ public class MainMenuPanel extends ColorPanel {
         this.add(mewPanel);
     }
 
+    // MODIFIES: this
     // EFFECTS: writes trainer data to json file
     public void saveInformation() {
         try {
@@ -68,6 +69,7 @@ public class MainMenuPanel extends ColorPanel {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: reads trainer data to json file
     public void loadInformation() {
         try {

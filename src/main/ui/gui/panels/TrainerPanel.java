@@ -54,6 +54,7 @@ public class TrainerPanel extends ColorPanel {
         setupInfoPanel();
     }
 
+    // MODIFIES: this
     // EFFECTS: creates name panel, gender panel, confirm button, and info text needed for trainer panel
     private void setupInfoPanel() {
         setupNamePanel();
@@ -69,6 +70,7 @@ public class TrainerPanel extends ColorPanel {
         infoPanel.add(descriptionLabel);
     }
 
+    // MODIFIES: this
     // EFFECTS: sets up the label and text field needed for users to change their trainer's name
     private void setupNamePanel() {
         namePanel = new JPanel();
@@ -81,6 +83,7 @@ public class TrainerPanel extends ColorPanel {
         nameTextField.setText(myTrainer.getName());
     }
 
+    // MODIFIES: this
     // EFFECTS: sets up up gender label and radio buttons in button group
     private void setupGenderPanel() {
         genderPanel = new JPanel();
@@ -103,6 +106,7 @@ public class TrainerPanel extends ColorPanel {
         genderButtonGroup.add(otherRadioButton);
     }
 
+    // MODIFIES: this
     // EFFECTS: handles confirm button presses to the change trainer name button
     private void handleConfirm() {
         String userTrainerName = nameTextField.getText();
@@ -122,6 +126,7 @@ public class TrainerPanel extends ColorPanel {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: updates text label for trainer information
     @Override
     public void updateLabels() {

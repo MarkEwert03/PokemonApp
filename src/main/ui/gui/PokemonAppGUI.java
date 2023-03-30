@@ -47,7 +47,8 @@ public class PokemonAppGUI extends JFrame {
         setupFrame();
     }
 
-    // sets the global trainer (to be used after load)
+    // MODIFIES: this
+    // EFFECTS: sets the global trainer (to be used after load)
     public void setGlobalTrainer(Trainer newTrainer) {
         globalTrainer = newTrainer;
     }
@@ -84,6 +85,7 @@ public class PokemonAppGUI extends JFrame {
         });
     }
 
+    // MODIFIES: this
     // EFFECTS: helper that adds panel to mainTabbedPane and picks tab and panel colour for given c
     private void setupTab(String text, ColorPanel panel) {
         mainTabbedPane.add(text, panel);

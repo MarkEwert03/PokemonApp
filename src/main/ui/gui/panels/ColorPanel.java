@@ -29,11 +29,6 @@ public abstract class ColorPanel extends JPanel {
         myTrainer = updatedTrainer;
     }
 
-    // EFFECTS: gets updated trainer (used after load)
-    public Trainer getMyTrainer() {
-        return myTrainer;
-    }
-
     // MODIFIES: this
     // EFFECTS: abstract method to set up specifics for each colour panel
     protected abstract void initialize();

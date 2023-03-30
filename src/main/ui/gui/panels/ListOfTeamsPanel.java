@@ -1,7 +1,5 @@
 package ui.gui.panels;
 
-import model.Pokemon;
-import model.Species;
 import model.Trainer;
 
 import javax.swing.*;
