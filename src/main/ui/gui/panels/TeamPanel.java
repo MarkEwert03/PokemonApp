@@ -27,8 +27,9 @@ public class TeamPanel extends ColorPanel {
     private JLabel addPokemonLabel;
     private JComboBox<Pokemon> addPokemonBox;
 
-    private JPanel moveFrontPanel;
-    private JLabel moveFrontLabel;
+    private JPanel movePokemonPanel;
+    private JLabel movePokemonLabel;
+    private JComboBox<Pokemon> movePokemonBox;
 
     private JButton confirmButton;
 
@@ -83,7 +84,7 @@ public class TeamPanel extends ColorPanel {
             modifyTeamPanel.setVisible(true);
             setupNamePanel();
             setupAddPokemonPanel();
-            setupMoveFrontPanel();
+            setupRemovePokemonPanel();
 
             confirmButton = new JButton("Confirm Changes");
             modifyTeamPanel.add(confirmButton);
@@ -130,40 +131,67 @@ public class TeamPanel extends ColorPanel {
         }
     }
 
-    // EFFECTS: creates buttons needed for user to pick which Pokemon should be moved to front
-    private void setupMoveFrontPanel() {
-        moveFrontPanel = new JPanel();
-        modifyTeamPanel.add(moveFrontPanel);
-        moveFrontPanel.setLayout(new FlowLayout());
-        moveFrontPanel.setBackground(colour);
-        moveFrontLabel = new JLabel("Move Front");
-        moveFrontPanel.add(moveFrontLabel);
+    // EFFECTS: creates buttons needed for user to move a pokemon from team
+    private void setupRemovePokemonPanel() {
+        movePokemonPanel = new JPanel();
+        modifyTeamPanel.add(movePokemonPanel);
+        movePokemonPanel.setLayout(new FlowLayout());
+        movePokemonPanel.setBackground(colour);
+        movePokemonLabel = new JLabel("Remove Pokemon from team ");
+        movePokemonPanel.add(movePokemonLabel);
+        movePokemonBox = new JComboBox<>();
+        movePokemonPanel.add(movePokemonBox);
+        movePokemonBox.setPreferredSize(new Dimension(250, 30));
+        movePokemonBox.removeAllItems();
+        movePokemonBox.addItem(null);
+        for (Pokemon p : currentTeam.getRoster()) {
+            movePokemonBox.addItem(p);
+        }
     }
 
     // MODIFIES: this
-    // EFFECTS: changes the information of the Pokemon based on the users inputed fields
+    // EFFECTS: changes the information of the Pokemon based on the users inputted fields
     private void handleConfirm() {
         String userTeamName = nameTextField.getText();
         Pokemon pokemonToAdd = (Pokemon) addPokemonBox.getSelectedItem();
+        Pokemon pokemonToMove = (Pokemon) movePokemonBox.getSelectedItem();
 
         if (userTeamName.isBlank()) {
-            JOptionPane.showMessageDialog(null, "Invlaid Team Name",
-                    "ERROR", JOptionPane.ERROR_MESSAGE);
+            basicError("Invalid Team Name");
         } else if (!currentTeam.getName().equals(userTeamName) && myTrainer.getAllTeamNames().contains(userTeamName)) {
-            JOptionPane.showMessageDialog(null, "Duplicate Team Name",
-                    "ERROR", JOptionPane.ERROR_MESSAGE);
-        } else if (currentTeam.containsPokemon(pokemonToAdd)) {
-            JOptionPane.showMessageDialog(null, "That pokemon is already on your team!",
-                    "ERROR", JOptionPane.ERROR_MESSAGE);
+            basicError("Duplicate Team Name");
+        } else if (pokemonToAdd != null && currentTeam.containsPokemon(pokemonToAdd)) {
+            basicError(pokemonToAdd + " is already on your team!");
+        } else if (pokemonToAdd != null && currentTeam.isMaxSize()) {
+            basicError(currentTeam.getName() + " is full!");
         } else {
-            currentTeam.setName(userTeamName);
-            nameLabel.setText("Change Team " + currentTeam.getName() + "'s name: ");
-            if (pokemonToAdd != null) {
-                myTrainer.addPokemonToTeam(pokemonToAdd, currentTeam.getName());
-                currentTeamLabel.setText(currentTeam.oneLineSummary());
-                teamSelectionBox.requestFocus();
-            }
+            doConfirmation(userTeamName, pokemonToAdd, pokemonToMove);
         }
+    }
+
+    // EFFECTS: updates labels and information once no errors were received by click
+    private void doConfirmation(String userTeamName, Pokemon pokemonToAdd, Pokemon pokemonToMove) {
+        currentTeam.setName(userTeamName);
+        nameLabel.setText("Change Team " + currentTeam.getName() + "'s name: ");
+        if (pokemonToMove != null) {
+            currentTeam.moveFront(pokemonToMove);
+            movePokemonBox.requestFocus();
+        }
+        if (pokemonToAdd != null) {
+            myTrainer.addPokemonToTeam(pokemonToAdd, currentTeam.getName());
+        }
+        currentTeamLabel.setText(currentTeam.oneLineSummary());
+        teamSelectionBox.requestFocus();
+        movePokemonBox.removeAllItems();
+        movePokemonBox.addItem(null);
+        for (Pokemon p : currentTeam.getRoster()) {
+            movePokemonBox.addItem(p);
+        }
+    }
+
+    // EFFECTS: helper for creating error windows to alert user
+    private void basicError(String msg) {
+        JOptionPane.showMessageDialog(null, msg, "ERROR", JOptionPane.ERROR_MESSAGE);
     }
 
     // EFFECTS: updates text label for specific team information

@@ -1,11 +1,113 @@
 {
-    "gender": "FEMALE",
-    "name": "TESTER",
-    "allTeams": [],
-    "allRanchPokemon": [{
-        "gender": "MALE",
-        "species": "RATTATA",
-        "nickname": "rat face",
-        "shiny": false
-    }]
+    "gender": "MALE",
+    "name": "Mark",
+    "allTeams": [
+        {
+            "teamName": "Funny Team",
+            "allTeamPokemon": [
+                {
+                    "gender": "MALE",
+                    "species": "WEEDLE",
+                    "nickname": "lil guy",
+                    "shiny": true
+                },
+                {
+                    "gender": "MALE",
+                    "species": "SQUIRTLE",
+                    "nickname": "Bubble",
+                    "shiny": false
+                }
+            ]
+        },
+        {
+            "teamName": "Strong Team",
+            "allTeamPokemon": [
+                {
+                    "gender": "MALE",
+                    "species": "RAICHU",
+                    "nickname": "Thor",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "BEEDRILL",
+                    "nickname": "Stabby",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "CHARIZARD",
+                    "nickname": "Beast",
+                    "shiny": true
+                }
+            ]
+        },
+        {
+            "teamName": "random team",
+            "allTeamPokemon": [
+                {
+                    "gender": "FEMALE",
+                    "species": "BULBASAUR",
+                    "nickname": "Vine",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "SQUIRTLE",
+                    "nickname": "Bubble",
+                    "shiny": false
+                },
+                {
+                    "gender": "MALE",
+                    "species": "PIKACHU",
+                    "nickname": "Sparky",
+                    "shiny": false
+                }
+            ]
+        }
+    ],
+    "allRanchPokemon": [
+        {
+            "gender": "MALE",
+            "species": "PIKACHU",
+            "nickname": "Sparky",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "SQUIRTLE",
+            "nickname": "Bubble",
+            "shiny": false
+        },
+        {
+            "gender": "FEMALE",
+            "species": "BULBASAUR",
+            "nickname": "Vine",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "CHARIZARD",
+            "nickname": "Beast",
+            "shiny": true
+        },
+        {
+            "gender": "MALE",
+            "species": "WEEDLE",
+            "nickname": "lil guy",
+            "shiny": true
+        },
+        {
+            "gender": "MALE",
+            "species": "BEEDRILL",
+            "nickname": "Stabby",
+            "shiny": false
+        },
+        {
+            "gender": "MALE",
+            "species": "RAICHU",
+            "nickname": "Thor",
+            "shiny": false
+        }
+    ]
 }

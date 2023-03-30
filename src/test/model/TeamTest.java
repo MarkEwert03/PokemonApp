@@ -3,6 +3,8 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static model.Team.TEAM_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -61,6 +63,14 @@ class TeamTest {
         assertEquals("Empty", emptyTeam.getName());
         emptyTeam.setName("New Empty");
         assertEquals("New Empty", emptyTeam.getName());
+    }
+
+    @Test
+    void testGetRoster() {
+        List<Pokemon> gottenRoster = multipleTeam.getRoster();
+        assertEquals(bulba, gottenRoster.get(0));
+        assertEquals(charm, gottenRoster.get(1));
+        assertEquals(squirt, gottenRoster.get(2));
     }
 
     @Test

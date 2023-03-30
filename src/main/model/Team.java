@@ -32,6 +32,10 @@ public class Team implements Writable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Pokemon> getRoster() {
+        return Collections.unmodifiableList(roster);
+    }
     // Getters and Setters ---------------------------------------------------------------------------------------------
 
     // Methods ---------------------------------------------------------------------------------------------------------
@@ -51,8 +55,14 @@ public class Team implements Writable {
     }
 
     // EFFECTS: returns true if p is in the team, false otherwise
-    public boolean containsPokemon(Pokemon p) {
-        return roster.contains(p);
+    public boolean containsPokemon(Pokemon pokemon) {
+        String nick = pokemon.getNickname();
+        for (Pokemon p : roster) {
+            if (p.getNickname().equals(nick)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // EFFECTS: displays the summary of this Team over multiple lines

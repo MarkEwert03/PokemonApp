@@ -50,12 +50,12 @@ public class Trainer implements Writable {
 
     // EFFECTS: produces all the Pokemon in trainer's ranch
     public List<Pokemon> getRanch() {
-        return ranch;
+        return Collections.unmodifiableList(ranch);
     }
 
     // EFFECTS: produces all the Trainer's teams
     public List<Team> getTeams() {
-        return teams;
+        return Collections.unmodifiableList(teams);
     }
 
     // MODIFIES: this
