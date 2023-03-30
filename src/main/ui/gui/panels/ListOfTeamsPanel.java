@@ -62,20 +62,19 @@ public class ListOfTeamsPanel extends ColorPanel {
             JOptionPane.showMessageDialog(null, "You haven't made any teams yet!",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            String teamName = textPrompt("Name of team");
-            while (teamName != null && !myTrainer.getAllTeamNames().contains(teamName)) {
-                JOptionPane.showMessageDialog(null, "Incorrect Team Name",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-                teamName = textPrompt("Name of team");
-            }
-            if (teamName == null) {
+            String[] teamNames = myTrainer.getAllTeamNames().toArray(new String[0]);
+
+            String name = (String) JOptionPane.showInputDialog(null,
+                    "Which team do you wish to delete?",
+                    "Team Selector", JOptionPane.QUESTION_MESSAGE, null, teamNames, null);
+            if (name == null) {
                 return;
             }
             int confirmation = JOptionPane.showConfirmDialog(this,
                     "Are you sure? This action cannot be undone...",
                     "Confirmation Window", JOptionPane.YES_NO_OPTION);
             if (confirmation == JOptionPane.YES_OPTION) {
-                myTrainer.deleteTeam(teamName);
+                myTrainer.deleteTeam(name);
             }
             updateLabels();
         }

@@ -71,26 +71,25 @@ public class RanchPanel extends ColorPanel {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates new window to let users delete a pokemon from ranch and all teams
+    // EFFECTS: creates new window to let users delete a Pokemon from ranch and all teams
     private void handleDeletePokemon() {
         if (myTrainer.hasZeroPokemon()) {
             JOptionPane.showMessageDialog(null, "You haven't made any Pokemon yet!",
                     "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            String pokeNickname = textPrompt("Nickname of Pokemon");
-            while (pokeNickname != null && !myTrainer.getAllPokemonNicknames().contains(pokeNickname)) {
-                JOptionPane.showMessageDialog(null, "Incorrect Nickname",
-                        "ERROR", JOptionPane.ERROR_MESSAGE);
-                pokeNickname = textPrompt("Nickname of Pokemon");
-            }
-            if (pokeNickname == null) {
+            String[] nicks = myTrainer.getAllPokemonNicknames().toArray(new String[0]);
+
+            String nickname = (String) JOptionPane.showInputDialog(null,
+                    "Which Pokemon do you wish to delete?",
+                    "Ranch Selector", JOptionPane.QUESTION_MESSAGE, null, nicks, null);
+            if (nickname == null) {
                 return;
             }
             int confirmation = JOptionPane.showConfirmDialog(this,
                     "Are you sure? This action cannot be undone...",
                     "Confirmation Window", JOptionPane.YES_NO_OPTION);
             if (confirmation == JOptionPane.YES_OPTION) {
-                myTrainer.deletePokemon(pokeNickname);
+                myTrainer.deletePokemon(nickname);
             }
             updateLabels();
         }
