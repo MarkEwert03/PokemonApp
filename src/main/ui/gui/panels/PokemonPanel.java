@@ -178,7 +178,7 @@ public class PokemonPanel extends ColorPanel {
     // MODIFIES: this
     // EFFECTS: changes the information of the Pokemon based on the users inputed fields
     private void handleConfirm() {
-        if (nicknameTextField.getText().isBlank()) {
+        if (nicknameTextField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Invalid Nickname",
                     "ERROR", JOptionPane.ERROR_MESSAGE);
         } else if (!currentPokemon.getNickname().equals(nicknameTextField.getText())

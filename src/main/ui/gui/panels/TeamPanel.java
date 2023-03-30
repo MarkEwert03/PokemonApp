@@ -156,7 +156,7 @@ public class TeamPanel extends ColorPanel {
         Pokemon pokemonToAdd = (Pokemon) addPokemonBox.getSelectedItem();
         Pokemon pokemonToMove = (Pokemon) movePokemonBox.getSelectedItem();
 
-        if (userTeamName.isBlank()) {
+        if (userTeamName.isEmpty()) {
             basicError("Invalid Team Name");
         } else if (!currentTeam.getName().equals(userTeamName) && myTrainer.getAllTeamNames().contains(userTeamName)) {
             basicError("Duplicate Team Name");

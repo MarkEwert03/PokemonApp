@@ -110,7 +110,7 @@ public class TrainerPanel extends ColorPanel {
     // EFFECTS: handles confirm button presses to the change trainer name button
     private void handleConfirm() {
         String userTrainerName = nameTextField.getText();
-        if (!userTrainerName.isBlank()) {
+        if (!userTrainerName.isEmpty()) {
             myTrainer.setName(userTrainerName);
             if (maleRadioButton.isSelected()) {
                 myTrainer.setGender(Trainer.Gender.MALE);
