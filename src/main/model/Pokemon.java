@@ -10,6 +10,7 @@ public class Pokemon implements Writable {
     private String nickname;
     private boolean shiny;
     private Gender gender;
+    private EventLog logger;
 
     public enum Gender {
         MALE, FEMALE, UNKNOWN
@@ -22,6 +23,7 @@ public class Pokemon implements Writable {
         this.nickname = capitalize(species.toString());
         this.shiny = false;
         this.gender = Gender.MALE;
+        logger = EventLog.getInstance();
     }
 
     // EFFECTS: constructs a Pokemon with given species, nickname, gender, and shiny status
@@ -57,18 +59,21 @@ public class Pokemon implements Writable {
     // MODIFIES: this
     // EFFECTS: changes the nickname of the Pokemon to given nickname
     public void setNickname(String nickname) {
+        logger.logEvent(new Event("Changed Pokemon nickname from " + this.nickname + " to " + nickname));
         this.nickname = nickname;
     }
 
     // MODIFIES: this
     // EFFECTS: changes the shiny status of the Pokemon to given shiny status
     public void setShiny(boolean shiny) {
+        logger.logEvent(new Event("Changed Pokemon shiny status from " + this.shiny + " to " + shiny));
         this.shiny = shiny;
     }
 
     // MODIFIES: this
     // EFFECTS: changes the gender of the Pokemon to given gender
     public void setGender(Gender gender) {
+        logger.logEvent(new Event("Changed Pokemon gender from " + this.gender + " to " + gender));
         this.gender = gender;
     }
     // Getters and Setters ---------------------------------------------------------------------------------------------

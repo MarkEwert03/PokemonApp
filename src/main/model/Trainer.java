@@ -14,6 +14,7 @@ public class Trainer implements Writable {
     private Gender gender;
     private List<Pokemon> ranch;
     private List<Team> teams;
+    private EventLog logger;
 
     public enum Gender {
         MALE, FEMALE, OTHER
@@ -26,6 +27,7 @@ public class Trainer implements Writable {
         gender = Gender.OTHER;
         ranch = new ArrayList<>();
         teams = new ArrayList<>();
+        logger = EventLog.getInstance();
     }
 
     // constructs a trainer with given name and given gender
@@ -34,6 +36,7 @@ public class Trainer implements Writable {
         this.gender = gender;
         ranch = new ArrayList<>();
         teams = new ArrayList<>();
+        logger = EventLog.getInstance();
     }
     // Constructors ----------------------------------------------------------------------------------------------------
 
@@ -61,12 +64,14 @@ public class Trainer implements Writable {
     // MODIFIES: this
     // EFFECTS: changes the name of the trainer to given name
     public void setName(String name) {
+        logger.logEvent(new Event("Changed Trainer name from " + this.name + " to " + name));
         this.name = name;
     }
 
     // MODIFIES: this
     // EFFECTS: changes the gender of the trainer to given gender
     public void setGender(Gender gender) {
+        logger.logEvent(new Event("Changed Trainer gender from " + this.gender + " to " + gender));
         this.gender = gender;
     }
     // Getters and Setters ---------------------------------------------------------------------------------------------
@@ -107,6 +112,7 @@ public class Trainer implements Writable {
     // MODIFIES: this
     // EFFECTS: adds p to the ranch
     public void addPokemonToRanch(Pokemon p) {
+        logger.logEvent(new Event("Added " + p + " to " + this.name + " Ranch"));
         ranch.add(p);
     }
 
@@ -120,6 +126,7 @@ public class Trainer implements Writable {
                 for (Team t : teams) {
                     t.removePokemon(p);
                 }
+                logger.logEvent(new Event("Removed " + p + " from " + this.name + " Ranch"));
                 ranch.remove(p);
                 return true;
             }
@@ -202,6 +209,7 @@ public class Trainer implements Writable {
     // MODIFIES: this
     // EFFECTS: makes a new empty Team and adds it to trainers list of teams
     public void makeTeam(String teamName) {
+        logger.logEvent(new Event("Made new team called " + teamName));
         teams.add(new Team(teamName));
     }
 
@@ -209,6 +217,7 @@ public class Trainer implements Writable {
     // MODIFIES: this
     // EFFECTS: adds te to trainers list of teams
     public void addTeam(Team te) {
+        logger.logEvent(new Event("Added " + te + " to Trainer's list of teams"));
         teams.add(te);
     }
 
@@ -225,6 +234,7 @@ public class Trainer implements Writable {
         }
 
         if (!addingTeam.containsPokemon(addingPokemon)) {
+            logger.logEvent(new Event("Added " + addingPokemon + " to " + addingTeam));
             addingTeam.addPokemon(addingPokemon);
             return true;
         } else {
@@ -238,6 +248,7 @@ public class Trainer implements Writable {
     public boolean deleteTeam(String teamName) {
         if (getAllTeamNames().contains(teamName)) {
             Team deletingTeam = getTeamFromName(teamName);
+            logger.logEvent(new Event("Deleted " + deletingTeam));
             teams.remove(deletingTeam);
             return true;
         }

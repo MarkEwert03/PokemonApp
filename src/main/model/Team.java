@@ -12,12 +12,14 @@ public class Team implements Writable {
     public static final int TEAM_SIZE = 6;
     private String name;
     private List<Pokemon> roster;
+    private EventLog logger;
 
     // Constructors ----------------------------------------------------------------------------------------------------
     // EFFECTS: constructs a team with given name
     public Team(String name) {
         this.name = name;
         roster = new ArrayList<>();
+        logger = EventLog.getInstance();
     }
     // Constructors ----------------------------------------------------------------------------------------------------
 
@@ -30,6 +32,7 @@ public class Team implements Writable {
     // MODIFIES: this
     // EFFECTS: changes the name of the team to given name
     public void setName(String name) {
+        logger.logEvent(new Event("Changed Team name from " + this.name + " to " + name));
         this.name = name;
     }
 
@@ -97,6 +100,7 @@ public class Team implements Writable {
     // EFFECTS: length of team < TEAM_SIZE, adds p to the team and returns true, otherwise returns false
     public boolean addPokemon(Pokemon p) {
         if (length() < TEAM_SIZE) {
+            logger.logEvent(new Event("Added " + p + " to " + this));
             roster.add(p);
             return true;
         } else {
@@ -109,6 +113,7 @@ public class Team implements Writable {
     // EFFECTS: if p is in the team, removes p from roster and returns true, otherwise returns false
     public boolean removePokemon(Pokemon p) {
         if (roster.contains(p)) {
+            logger.logEvent(new Event("Removed " + p + " from " + this));
             roster.remove(p);
             return true;
         } else {
@@ -126,6 +131,7 @@ public class Team implements Writable {
     //          otherwise return false
     public boolean moveFront(Pokemon p) {
         if (roster.contains(p)) {
+            logger.logEvent(new Event("Moved " + p + " to front of " + this));
             int index = getPokemonIndex(p);
             for (int i = length() - 1; i > 0; i--) {
                 if (i <= index) {
