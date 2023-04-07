@@ -1,7 +1,6 @@
 package ui.gui.panels;
 
 import model.Trainer;
-import ui.gui.PokemonAppGUI;
 
 import javax.swing.*;
 import java.awt.*;

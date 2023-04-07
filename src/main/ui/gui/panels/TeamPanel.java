@@ -137,7 +137,7 @@ public class TeamPanel extends ColorPanel {
         modifyTeamPanel.add(movePokemonPanel);
         movePokemonPanel.setLayout(new FlowLayout());
         movePokemonPanel.setBackground(colour);
-        movePokemonLabel = new JLabel("Remove Pokemon from team ");
+        movePokemonLabel = new JLabel("Move Pokemon to Front ");
         movePokemonPanel.add(movePokemonLabel);
         movePokemonBox = new JComboBox<>();
         movePokemonPanel.add(movePokemonBox);
