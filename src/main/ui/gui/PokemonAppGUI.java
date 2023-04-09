@@ -1,10 +1,14 @@
 package ui.gui;
 
+import model.Event;
+import model.EventLog;
 import model.Trainer;
 import ui.gui.panels.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 
 // represents the main frame for the gui version of the Pokemon app
@@ -68,9 +72,24 @@ public class PokemonAppGUI extends JFrame {
         this.setSize(WIDTH, HEIGHT);
         this.setLayout(new GridLayout());
         this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(mainTabbedPane);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                for (Event event : EventLog.getInstance()) {
+                    System.out.println(event);
+                }
+                System.exit(0);
+            }
+        });
 
+        setupMainTabbedPane();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates the tabs for the main tabbed main and adds them to the pane
+    private void setupMainTabbedPane() {
+        this.add(mainTabbedPane);
         setupTab("Main Menu", mainMenuPanel);
         setupTab("Modify Trainer Information", trainerPanel);
         setupTab("Modify Ranch of Pokemon", ranchPanel);

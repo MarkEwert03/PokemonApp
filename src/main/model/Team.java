@@ -100,7 +100,7 @@ public class Team implements Writable {
     // EFFECTS: length of team < TEAM_SIZE, adds p to the team and returns true, otherwise returns false
     public boolean addPokemon(Pokemon p) {
         if (length() < TEAM_SIZE) {
-            logger.logEvent(new Event("Added " + p + " to " + this));
+            logger.logEvent(new Event("Added " + p + " to " + this.name));
             roster.add(p);
             return true;
         } else {
@@ -113,7 +113,7 @@ public class Team implements Writable {
     // EFFECTS: if p is in the team, removes p from roster and returns true, otherwise returns false
     public boolean removePokemon(Pokemon p) {
         if (roster.contains(p)) {
-            logger.logEvent(new Event("Removed " + p + " from " + this));
+            logger.logEvent(new Event("Removed " + p + " from " + this.name));
             roster.remove(p);
             return true;
         } else {
@@ -131,7 +131,7 @@ public class Team implements Writable {
     //          otherwise return false
     public boolean moveFront(Pokemon p) {
         if (roster.contains(p)) {
-            logger.logEvent(new Event("Moved " + p + " to front of " + this));
+            logger.logEvent(new Event("Moved " + p + " to front of " + this.name));
             int index = getPokemonIndex(p);
             for (int i = length() - 1; i > 0; i--) {
                 if (i <= index) {

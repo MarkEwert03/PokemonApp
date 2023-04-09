@@ -234,7 +234,6 @@ public class Trainer implements Writable {
         }
 
         if (!addingTeam.containsPokemon(addingPokemon)) {
-            logger.logEvent(new Event("Added " + addingPokemon + " to " + addingTeam));
             addingTeam.addPokemon(addingPokemon);
             return true;
         } else {

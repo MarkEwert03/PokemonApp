@@ -32,6 +32,7 @@ public class Pokemon implements Writable {
         this.nickname = nickname;
         this.shiny = shiny;
         this.gender = gender;
+        logger = EventLog.getInstance();
     }
     // Constructors ----------------------------------------------------------------------------------------------------
 

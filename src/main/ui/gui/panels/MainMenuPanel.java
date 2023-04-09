@@ -1,6 +1,7 @@
 package ui.gui.panels;
 
-import model.Pokemon;
+import model.Event;
+import model.EventLog;
 import model.Trainer;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -10,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Iterator;
 
 // represents a JPanel for the main menu for users to save and load data
 public class MainMenuPanel extends ColorPanel {
@@ -19,6 +21,7 @@ public class MainMenuPanel extends ColorPanel {
 
     // middle row
     private JPanel statePanel;
+    private JButton exitButton;
     private JButton saveButton;
     private JButton loadButton;
     private JLabel changedStateLabel;
@@ -70,6 +73,13 @@ public class MainMenuPanel extends ColorPanel {
     private void setupStatePanel() {
         statePanel.setBackground(colour);
 
+        exitButton = new JButton("Exit App");
+        exitButton.setVisible(true);
+        statePanel.add(exitButton);
+        exitButton.addActionListener(e -> {
+            handleExit();
+        });
+
         saveButton = new JButton("Save Information");
         saveButton.setVisible(true);
         statePanel.add(saveButton);
@@ -88,9 +98,17 @@ public class MainMenuPanel extends ColorPanel {
         statePanel.add(changedStateLabel);
     }
 
+    // EFFECTS: closes the app and prints out log to console
+    private void handleExit() {
+        for (Event event : EventLog.getInstance()) {
+            System.out.println(event);
+        }
+        System.exit(0);
+    }
+
     // MODIFIES: this
     // EFFECTS: writes trainer data to json file
-    public void saveInformation() {
+    private void saveInformation() {
         try {
             jsonWriter.open();
             jsonWriter.write(myTrainer);
@@ -103,7 +121,7 @@ public class MainMenuPanel extends ColorPanel {
 
     // MODIFIES: this
     // EFFECTS: reads trainer data to json file
-    public void loadInformation() {
+    private void loadInformation() {
         try {
             myTrainer = jsonReader.read();
             window.setGlobalTrainer(myTrainer);
