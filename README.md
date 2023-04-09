@@ -44,3 +44,33 @@ it!
 - You can locate my visual component by seeing the chainable rendering of the trainer on the trainer panel
 - You can save the state of my application by clicking the save button on the main menu
 - You can reload the state of my application by clicking the load button on the main menu
+
+# Phase 4: Task 2
+- Sat Apr 08 19:54:15 PDT 2023
+- Changed Trainer name from Trainer to Mark
+- Sat Apr 08 19:54:16 PDT 2023
+- Changed Trainer gender from OTHER to MALE
+- Sat Apr 08 19:54:25 PDT 2023
+- Added baba the Bulbasaur to Mark Ranch
+- Sat Apr 08 19:54:36 PDT 2023
+- Changed baba's nickname from baba to bloom
+- Sat Apr 08 19:54:56 PDT 2023
+- Added beast the Charizard to Mark Ranch
+- Sat Apr 08 19:55:02 PDT 2023
+- Changed beast's gender from MALE to FEMALE
+- Sat Apr 08 19:55:02 PDT 2023
+- Changed beast's shiny status from false to true
+- Sat Apr 08 19:55:07 PDT 2023
+- Made new team called cool team
+- Sat Apr 08 19:55:14 PDT 2023
+- Made new team called empty team
+- Sat Apr 08 19:55:22 PDT 2023
+- Added bloom the Bulbasaur to cool team
+- Sat Apr 08 19:55:24 PDT 2023
+- Added beast the Charizard to cool team
+- Sat Apr 08 19:55:26 PDT 2023
+- Moved beast the Charizard to front of cool team
+- Sat Apr 08 19:55:32 PDT 2023
+- Changed very cool team's name from cool team to very cool team
+- Sat Apr 08 19:55:38 PDT 2023
+- Deleted empty team (0 Pokemon)
