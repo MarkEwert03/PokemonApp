@@ -64,14 +64,18 @@ public class Trainer implements Writable {
     // MODIFIES: this
     // EFFECTS: changes the name of the trainer to given name
     public void setName(String name) {
-        logger.logEvent(new Event("Changed Trainer name from " + this.name + " to " + name));
+        if (!this.name.equals(name)) {
+            logger.logEvent(new Event("Changed Trainer name from " + this.name + " to " + name));
+        }
         this.name = name;
     }
 
     // MODIFIES: this
     // EFFECTS: changes the gender of the trainer to given gender
     public void setGender(Gender gender) {
-        logger.logEvent(new Event("Changed Trainer gender from " + this.gender + " to " + gender));
+        if (!this.gender.equals(gender)) {
+            logger.logEvent(new Event("Changed Trainer gender from " + this.gender + " to " + gender));
+        }
         this.gender = gender;
     }
     // Getters and Setters ---------------------------------------------------------------------------------------------

@@ -32,7 +32,9 @@ public class Team implements Writable {
     // MODIFIES: this
     // EFFECTS: changes the name of the team to given name
     public void setName(String name) {
-        logger.logEvent(new Event("Changed Team name from " + this.name + " to " + name));
+        if (!this.name.equals(name)) {
+            logger.logEvent(new Event("Changed " + name + "'s name from " + this.name + " to " + name));
+        }
         this.name = name;
     }
 
@@ -131,7 +133,9 @@ public class Team implements Writable {
     //          otherwise return false
     public boolean moveFront(Pokemon p) {
         if (roster.contains(p)) {
-            logger.logEvent(new Event("Moved " + p + " to front of " + this.name));
+            if (roster.indexOf(p) != 0) {
+                logger.logEvent(new Event("Moved " + p + " to front of " + this.name));
+            }
             int index = getPokemonIndex(p);
             for (int i = length() - 1; i > 0; i--) {
                 if (i <= index) {

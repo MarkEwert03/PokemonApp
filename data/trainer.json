@@ -2,20 +2,33 @@
     "gender": "MALE",
     "name": "Mark",
     "allTeams": [{
-        "teamName": "empty team",
-        "allTeamPokemon": []
+        "teamName": "power team",
+        "allTeamPokemon": [
+            {
+                "gender": "MALE",
+                "species": "CHARIZARD",
+                "nickname": "THE beast",
+                "shiny": true
+            },
+            {
+                "gender": "FEMALE",
+                "species": "BULBASAUR",
+                "nickname": "flower",
+                "shiny": false
+            }
+        ]
     }],
     "allRanchPokemon": [
         {
-            "gender": "MALE",
-            "species": "BEEDRILL",
-            "nickname": "buzz",
+            "gender": "FEMALE",
+            "species": "BULBASAUR",
+            "nickname": "flower",
             "shiny": false
         },
         {
-            "gender": "FEMALE",
-            "species": "RATTATA",
-            "nickname": "rat woman",
+            "gender": "MALE",
+            "species": "CHARIZARD",
+            "nickname": "THE beast",
             "shiny": true
         }
     ]
