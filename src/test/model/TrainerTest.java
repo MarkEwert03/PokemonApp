@@ -27,6 +27,8 @@ public class TrainerTest {
     Trainer masterTrainer; //9 Pokemon, 3 teams with 3 Pokemon, 1 team with 6 Pokemon
     Pokemon bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise;
 
+    int len0;
+
     @BeforeEach
     void setup() {
         beginnerTrainer = new Trainer("Beginner Boy", MALE);
@@ -96,6 +98,17 @@ public class TrainerTest {
         masterTrainer.addPokemonToTeam(charizard, "Grandmaster Team");
         masterTrainer.addPokemonToTeam(wartortle, "Grandmaster Team");
         masterTrainer.addPokemonToTeam(blastoise, "Grandmaster Team");
+
+        len0 = getEventLogLength();
+    }
+
+    // EFFECTS: helper to get number of events in event log
+    private int getEventLogLength() {
+        int len = 0;
+        for (Event event : EventLog.getInstance()) {
+            len++;
+        }
+        return len;
     }
 
     @Test
@@ -103,6 +116,12 @@ public class TrainerTest {
         assertEquals("Beginner Boy", beginnerTrainer.getName());
         beginnerTrainer.setName("Jimmy");
         assertEquals("Jimmy", beginnerTrainer.getName());
+
+        int len1 = getEventLogLength();
+        beginnerTrainer.setName("Jimmy");
+        int len2 = getEventLogLength();
+        assertEquals(len0 + 1, len1);
+        assertEquals(len1, len2);
     }
 
     @Test
@@ -110,6 +129,12 @@ public class TrainerTest {
         assertEquals(MALE, masterTrainer.getGender());
         masterTrainer.setGender(OTHER);
         assertEquals(OTHER, masterTrainer.getGender());
+
+        int len1 = getEventLogLength();
+        masterTrainer.setGender(OTHER);
+        int len2 = getEventLogLength();
+        assertEquals(len0 + 1, len1);
+        assertEquals(len1, len2);
     }
 
     @Test

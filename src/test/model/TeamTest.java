@@ -27,6 +27,8 @@ class TeamTest {
     Pokemon fear;
     Team fullTeam;
 
+    int len0;
+
     @BeforeEach
     void setup() {
         emptyTeam = new Team("Empty");
@@ -56,6 +58,17 @@ class TeamTest {
         fullTeam.addPokemon(pid);
         fullTeam.addPokemon(rat);
         fullTeam.addPokemon(fear);
+
+        len0 = getEventLogLength();
+    }
+
+    // EFFECTS: helper to get number of events in event log
+    private int getEventLogLength() {
+        int len = 0;
+        for (Event event : EventLog.getInstance()) {
+            len++;
+        }
+        return len;
     }
 
     @Test
@@ -63,6 +76,12 @@ class TeamTest {
         assertEquals("Empty", emptyTeam.getName());
         emptyTeam.setName("New Empty");
         assertEquals("New Empty", emptyTeam.getName());
+
+        int len1 = getEventLogLength();
+        emptyTeam.setName("New Empty");
+        int len2 = getEventLogLength();
+        assertEquals(len0 + 1, len1);
+        assertEquals(len1, len2);
     }
 
     @Test

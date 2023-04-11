@@ -1,6 +1,5 @@
 package model;
 
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +16,8 @@ public class PokemonTest {
     Pokemon angel;
     Pokemon unknownGender;
 
+    int len0;
+
     @BeforeEach
     void setup() {
         weedle = new Pokemon(WEEDLE);
@@ -27,7 +28,16 @@ public class PokemonTest {
         angel = new Pokemon(PIDGEOTTO, "Angel", true, FEMALE);
         unknownGender = new Pokemon(BULBASAUR, "UG", false, UNKNOWN);
 
+        len0 = getEventLogLength();
+    }
 
+    // EFFECTS: helper to get number of events in event log
+    private int getEventLogLength() {
+        int len = 0;
+        for (Event event : EventLog.getInstance()) {
+            len++;
+        }
+        return len;
     }
 
     @Test
@@ -40,6 +50,12 @@ public class PokemonTest {
         assertEquals("Flower", flower.getNickname());
         flower.setNickname("Bloom");
         assertEquals("Bloom", flower.getNickname());
+
+        int len1 = getEventLogLength();
+        flower.setNickname("Bloom");
+        int len2 = getEventLogLength();
+        assertEquals(len0 + 1, len1);
+        assertEquals(len1, len2);
     }
 
     @Test
@@ -47,6 +63,12 @@ public class PokemonTest {
         assertFalse(zard.getShiny());
         zard.setShiny(true);
         assertTrue(zard.getShiny());
+
+        int len1 = getEventLogLength();
+        zard.setShiny(true);
+        int len2 = getEventLogLength();
+        assertEquals(len0 + 1, len1);
+        assertEquals(len1, len2);
     }
 
     @Test
@@ -54,6 +76,12 @@ public class PokemonTest {
         assertEquals(MALE, cannon.getGender());
         cannon.setGender(FEMALE);
         assertEquals(FEMALE, cannon.getGender());
+
+        int len1 = getEventLogLength();
+        cannon.setGender(FEMALE);
+        int len2 = getEventLogLength();
+        assertEquals(len0 + 1, len1);
+        assertEquals(len1, len2);
     }
     @Test
     void testIsValidSpecies() {

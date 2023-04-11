@@ -6,12 +6,13 @@ import org.junit.jupiter.api.Test;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for the Event class
  */
 public class EventTest {
+    private static final int HASH_CONSTANT = 13;
     private Event e;
     private Date d;
 
@@ -34,5 +35,12 @@ public class EventTest {
     @Test
     public void testToString() {
         assertEquals(d.toString() + "\n" + "Changed Pokemon nickname from bob to fred", e.toString());
+    }
+
+    @Test
+    public void testEquals() {
+        assertFalse(e.equals(null));
+        assertNotEquals(e, "Changed Pokemon nickname from bob to fred");
+        assertEquals(HASH_CONSTANT * e.getDate().hashCode() + e.getDescription().hashCode(),e.hashCode());
     }
 }
