@@ -74,3 +74,18 @@ it!
 - Changed very cool team's name from cool team to very cool team
 - Sat Apr 08 19:55:38 PDT 2023
 - Deleted empty team (0 Pokemon)
+
+# Phase 4: Task 3
+&emsp; As I started work on my GUI I liked the idea of keeping the code for each panel in my
+tabbed pane as separate classes all extending from one abstract class (ColorPanel). This class
+has a protected Trainer field that gets inherited. My idea was for this to be a universal trainer
+that each subpanel can reference, but I forgot that each panel would only know about an
+independent trainer and changes wouldn't be universal. To get around this, I had to pass a
+Trainer object to each subpanel constructors to initialize it, which worked but was a bit
+clunky.
+
+&emsp; My idea of a refactor would be to modify the Trainer field in (ColorPanel) to adhere to
+the singleton design pattern. I would still have it protected so the subclasses could all
+access it but instead of creating a new trainer, I would use the getInstance() method to make
+sure that everyone is refering to the same Trainer object. This would help declutter my code
+as well as make it easier to understand that I am only interested in ONE trainer object.
