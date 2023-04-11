@@ -111,5 +111,4 @@ public class PokemonAppGUI extends JFrame {
         mainTabbedPane.setBackgroundAt(mainTabbedPane.indexOfTab(text), panel.getColour());
         panel.setBackground(panel.getColour());
     }
-
 }
