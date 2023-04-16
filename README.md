@@ -1,6 +1,6 @@
 # Pokémon Team Builder
 
-## 2022W2 CPSC210 Project by Mark Ewert
+## Project by Mark Ewert
 
 In this project I am aiming to create a program that
 will allow users to create a team of up to six pokémon.
